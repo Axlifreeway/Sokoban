@@ -46,14 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameClasses.cs" />
+    <Compile Include="GameClasses\Box.cs" />
+    <Compile Include="GameClasses\Cell.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Levels.cs" />
+    <Compile Include="GameClasses\CellType.cs" />
+    <Compile Include="GameClasses\Entity.cs" />
+    <Compile Include="GameClasses\Levels.cs" />
+    <Compile Include="GameClasses\Map.cs" />
+    <Compile Include="GameClasses\Player.cs" />
+    <Compile Include="GameClasses\Servis\Controller.cs" />
+    <Compile Include="GameClasses\Servis\PlayerServis.cs" />
+    <Compile Include="GameClasses\View\Painter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
