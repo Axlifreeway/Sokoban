@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -9,19 +10,8 @@ namespace Sokoban.GameClasses.View
 {
     public class Painter
     {
-        public static Point start;
-        public static bool IsKeyPress;
+        public static Point start;        
         public static int idCurrentFrame;
-        delegate int getX(int x, int dx);
-        delegate int getY(int y, int dy);
-        static getX funX;
-        static getY funY;
-        public static Bitmap[] currentFrames;
-        static Painter()
-        {
-            funX = (int x, int dx) => x;
-            funY = (int y, int dy) => y;
-        }
 
         public static void Paint(object sender, PaintEventArgs e, Map map)
         {
@@ -40,41 +30,10 @@ namespace Sokoban.GameClasses.View
 
         public static void AnimatePlayer(Map map, Graphics g)
         {
-            var p = map.Player;           
-            start.X = funX(start.X, 32* idCurrentFrame);
-            start.Y = funY(start.Y, 32* idCurrentFrame);
-            g.DrawImage(currentFrames[idCurrentFrame], start);
-        }
-
-        public static Bitmap[] GetDirectionFrames(Map map)
-        {
             var p = map.Player;
-            Bitmap[] currentFrames = null;
-            if (p.Direction == Direction.Left)
-            {
-                currentFrames = p.playerFrames[Direction.Left];
-                funX = (int x, int dx) => x - dx;
-                funY = (int y, int dy) => y;
-            }
-            else if (p.Direction == Direction.Right)
-            {
-                currentFrames = p.playerFrames[Direction.Right];
-                funX = (int x, int dx) => x + dx;
-                funY = (int y, int dy) => y;
-            }
-            else if (p.Direction == Direction.Up)
-            {
-                currentFrames = p.playerFrames[Direction.Up];
-                funX = (int x, int dx) => x;
-                funY = (int y, int dy) => y - dy;
-            }
-            else
-            {
-                currentFrames = p.playerFrames[Direction.Down];
-                funX = (int x, int dx) => x;
-                funY = (int y, int dy) => y + dy;
-            }
-            return currentFrames;
+            start.X += 21 * idCurrentFrame * map.Player.DirX;
+            start.Y += 21 * idCurrentFrame * map.Player.DirY;
+            g.DrawImage(p.playerFrames[p.Direction, idCurrentFrame], start);
         }
 
         public static List<Bitmap[]> getFrames(Bitmap bmp, Rectangle selection, int countFrames, int dx, int dy)

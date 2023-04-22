@@ -12,7 +12,7 @@ namespace Sokoban
             X = x; Y = y;
             Model = new Bitmap(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\MainHero.png"));
             var source = new Bitmap(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\PlayerPicture.png"));
-            playerFrames = new PlayerFrames(source, 2, 300, 4);
+            playerFrames = new PlayerFrames(source, 1, 168, 4);
         }
         public Image Model { get; }
         

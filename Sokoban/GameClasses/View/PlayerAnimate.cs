@@ -16,20 +16,10 @@ namespace Sokoban.GameClasses.View
         private Bitmap[] leftFrames;
         private Bitmap[] rightFrames;
 
-        public PlayerFrames(
-            Bitmap[] downFrames, Bitmap[] upFrames, Bitmap[] leftFrames, Bitmap[] rightFrames, int countFrames)
-        {
-            this.leftFrames = leftFrames;
-            this.rightFrames = rightFrames;
-            this.downFrames = downFrames;
-            this.upFrames = upFrames;
-            this.countFrames = countFrames;
-        }
-
         public PlayerFrames(Bitmap sourse, int dx, int dy, int countFrames)
         {
-            var resulution = new Rectangle(new Point(0, 0), new Size(128, 128));
-            var frames = Painter.getFrames(sourse, resulution, 4, 2, 168);
+            var resulution = new Rectangle(new Point(0, 0), new Size(Levels.Width, Levels.Height));
+            var frames = Painter.getFrames(sourse, resulution, countFrames, dx, dy);
             this[Direction.Down] = frames[0];
             this[Direction.Up] = frames[1];
             this[Direction.Left] = frames[2];

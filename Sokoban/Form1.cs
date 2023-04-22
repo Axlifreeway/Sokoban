@@ -19,6 +19,7 @@ namespace Sokoban
     public partial class Form1 : Form
     {
         public static Timer timer1 = new Timer();
+        public static bool IsKeyPress;
         public Map map;
 
         public Form1()
@@ -30,40 +31,41 @@ namespace Sokoban
             timer1.Interval = 150;
             timer1.Tick += new EventHandler(Update);
             KeyDown += new KeyEventHandler(OnPress);
-            GameInitialisation();
-            Painter.currentFrames = Painter.GetDirectionFrames(map);
-            Painter.start = new Point(map.Player.X, map.Player.Y);            
-            timer1.Start();
+            GameInitialisation();           
         }
 
         public void GameInitialisation()
         {
-            map = new Map(Levels.level_1);           
+            map = new Map(Levels.level_1);
+            Painter.start = new Point(map.Player.X, map.Player.Y);
+            timer1.Start();
         }
 
         public void Update(object sender, EventArgs e)
-        {          
-            Invalidate();         
-            if(Painter.IsKeyPress)
+        {           
+            if (IsKeyPress)
             {
-                Painter.idCurrentFrame += 1;
-                if (Painter.idCurrentFrame == 3)
+                Painter.idCurrentFrame += 1;                    
+                if (Painter.idCurrentFrame == 4)
                 {
-                    Painter.idCurrentFrame = 0;                    
-                    Painter.IsKeyPress = false;
+                    Painter.idCurrentFrame = 0;
+                    IsKeyPress = false;
                 }
-                Painter.currentFrames = Painter.GetDirectionFrames(map);
             }
             else
             {
                 Painter.start = new Point(map.Player.X, map.Player.Y);
-            }               
+            }
+            Invalidate();            
         }
 
         private void OnPress(object sender, KeyEventArgs e)
         {
-            Painter.start = new Point(map.Player.X, map.Player.Y);
-            Painter.IsKeyPress = Controller.PlayerMove(e, map);           
+            if (!IsKeyPress)
+            {
+                Painter.start = new Point(map.Player.X, map.Player.Y);
+                IsKeyPress = Controller.PlayerMove(e, map);
+            }                   
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
