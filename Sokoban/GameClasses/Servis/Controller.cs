@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Sokoban.GameClasses.View;
 namespace Sokoban.GameClasses.Servis
 {
     public class Controller
     {
-        
-        public static void PlayerMove(KeyEventArgs e, Map map)
+        public static bool PlayerMove(KeyEventArgs e, Map map)
         {
             Player player = map.Player;
             switch (e.KeyCode)
@@ -40,6 +40,7 @@ namespace Sokoban.GameClasses.Servis
             }
             if (map.Player.X == map.Box.X && map.Player.Y == map.Box.Y)
                 PlayerServis.BoxMove(map);
+            return true;
         }
     }
 }

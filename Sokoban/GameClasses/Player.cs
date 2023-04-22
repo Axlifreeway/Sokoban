@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Sokoban.GameClasses;
+using Sokoban.GameClasses.View;
 
 namespace Sokoban
 {
@@ -13,12 +10,32 @@ namespace Sokoban
         public Player(int x, int y)
         {
             X = x; Y = y;
-            Model = new Bitmap(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\MainHero.png")); 
+            Model = new Bitmap(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\MainHero.png"));
+            var source = new Bitmap(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\PlayerPicture.png"));
+            playerFrames = new PlayerFrames(source, 2, 300, 4);
         }
         public Image Model { get; }
-        public float X { get; set; }
-        public float Y { get; set; }
+        
+        public PlayerFrames playerFrames { get; }
+        public int X { get; set; }
+        public int Y { get; set; }
         public int DirX { get; set; }
         public int DirY { get; set; }
+
+        public Direction Direction
+        {
+            get
+            {
+                if (DirX == 0 && DirY == 1)
+                    return Direction.Down;
+                else if (DirX == 0 && DirY == -1)
+                    return Direction.Up;
+                else if (DirX == 1 && DirY == 0)
+                    return Direction.Right;
+                else if (DirX == -1 && DirY == 0)
+                    return Direction.Left;
+                else return Direction.Down;
+            }
+        }
     }
 }

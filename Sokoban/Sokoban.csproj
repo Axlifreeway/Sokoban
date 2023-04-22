@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -55,6 +57,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GameClasses\CellType.cs" />
+    <Compile Include="GameClasses\Direction.cs" />
     <Compile Include="GameClasses\Entity.cs" />
     <Compile Include="GameClasses\Levels.cs" />
     <Compile Include="GameClasses\Map.cs" />
@@ -62,6 +65,7 @@
     <Compile Include="GameClasses\Servis\Controller.cs" />
     <Compile Include="GameClasses\Servis\PlayerServis.cs" />
     <Compile Include="GameClasses\View\Painter.cs" />
+    <Compile Include="GameClasses\View\PlayerAnimate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -93,6 +97,7 @@
     <Content Include="Models\Box.png" />
     <Content Include="Models\Classic.png" />
     <Content Include="Models\MainHero.png" />
+    <Content Include="Models\PlayerPicture.png" />
     <Content Include="Models\Wall.png" />
     <Content Include="Models\WinCell.png" />
   </ItemGroup>

@@ -11,12 +11,12 @@ namespace Sokoban.GameClasses.Servis
     {
         public static void Move(int x, int y, Map map, Player player)
         {
-            float moveX = x * player.DirX;
-            float moveY = y * player.DirY;
+            var moveX = x * player.DirX;
+            var moveY = y * player.DirY;
             if (player.X + moveX >= 0 && player.X + moveX < map.Width)
                 player.X += moveX;
             if (player.Y + moveY >= 0 && player.Y + moveY < map.Height)
-                player.Y += y * player.DirY;
+                player.Y += moveY;
         }
         public static void BoxMove(Map map)
         {
@@ -25,8 +25,6 @@ namespace Sokoban.GameClasses.Servis
             {
                 map.Box.X += map.Player.DirX * Levels.Width;
             }
-                
-
             if (map.Player.DirY * Levels.Height + map.Box.Y < map.Height && map.Player.DirY * Levels.Height + map.Box.Y > 0
                 && map.Cells[map.Box.X / Levels.Width, map.Box.Y / Levels.Height + map.Player.DirY].Type != CellType.Wall)
             {
