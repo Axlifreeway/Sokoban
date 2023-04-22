@@ -36,7 +36,7 @@ namespace Sokoban.GameClasses.Servis
                     PlayerServis.Move(128, 0, map, player);
                     break;
                 default:
-                    break;
+                    return false;                   
             }
             if (map.Player.X == map.Box.X && map.Player.Y == map.Box.Y)
                 PlayerServis.BoxMove(map);

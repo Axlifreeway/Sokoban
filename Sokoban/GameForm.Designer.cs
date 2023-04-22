@@ -37,7 +37,7 @@
             this.ClientSize = new System.Drawing.Size(896, 889);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "GameForm";
+            this.Name = "Form1";
             this.Text = "Sokoban";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
             this.ResumeLayout(false);

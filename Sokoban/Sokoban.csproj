@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Menu\AuthorsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\AuthorsForm.Designer.cs">
+      <DependentUpon>AuthorsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameClasses\Box.cs" />
     <Compile Include="GameClasses\Cell.cs" />
     <Compile Include="Form1.cs">
@@ -55,6 +61,7 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="GameClasses\CellType.cs" />
     <Compile Include="GameClasses\Direction.cs" />
@@ -66,10 +73,31 @@
     <Compile Include="GameClasses\Servis\PlayerServis.cs" />
     <Compile Include="GameClasses\View\Painter.cs" />
     <Compile Include="GameClasses\View\PlayerAnimate.cs" />
+    <Compile Include="Menu\MenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\MenuForm.Designer.cs">
+      <DependentUpon>MenuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\PauseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\PauseForm.Designer.cs">
+      <DependentUpon>PauseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu\MenuForm.resx">
+      <DependentUpon>MenuForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -101,5 +129,6 @@
     <Content Include="Models\Wall.png" />
     <Content Include="Models\WinCell.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
