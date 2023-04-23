@@ -33,7 +33,7 @@ namespace Sokoban.GameClasses.View
             var p = map.Player;
             start.X += 21 * idCurrentFrame * map.Player.DirX;
             start.Y += 21 * idCurrentFrame * map.Player.DirY;
-            g.DrawImage(p.playerFrames[p.Direction, idCurrentFrame], start);
+            g.DrawImage(p.PlayerFrames[p.Direction, idCurrentFrame], start);
         }
 
         public static List<Bitmap[]> getFrames(Bitmap bmp, Rectangle selection, int countFrames, int dx, int dy)

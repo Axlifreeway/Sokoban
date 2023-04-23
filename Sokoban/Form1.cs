@@ -28,7 +28,7 @@ namespace Sokoban
             this.SetStyle(ControlStyles.UserPaint, true);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            timer1.Interval = 150;
+            timer1.Interval = 100;
             timer1.Tick += new EventHandler(Update);
             KeyDown += new KeyEventHandler(OnPress);
             GameInitialisation();           
@@ -36,7 +36,7 @@ namespace Sokoban
 
         public void GameInitialisation()
         {
-            map = new Map(Levels.level_1);
+            map = new Map(Levels.level_2);
             Painter.start = new Point(map.Player.X, map.Player.Y);
             timer1.Start();
         }
@@ -51,6 +51,11 @@ namespace Sokoban
                     Painter.idCurrentFrame = 0;
                     IsKeyPress = false;
                 }
+                if (Painter.idCurrentFrame == 2)
+                {
+                    GameMusic.PlaySound(map.Player.PlayerSounds.FootStepSound);
+                }
+                GameMusic.StopMusic();
             }
             else
             {

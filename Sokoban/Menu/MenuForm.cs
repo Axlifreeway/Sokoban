@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sokoban.GameClasses.View;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,11 +16,13 @@ namespace Sokoban
         public MenuForm()
         {
             InitializeComponent();
+            GameMusic.GetMenuMusic();
         }
 
         private void gameStartButton_Click(object sender, EventArgs e)
         {
             var game = new GameForm();
+            GameMusic.StopMusic();
             game.Show();
         }
 

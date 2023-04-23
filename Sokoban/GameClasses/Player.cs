@@ -10,13 +10,22 @@ namespace Sokoban
         public Player(int x, int y)
         {
             X = x; Y = y;
-            Model = new Bitmap(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\MainHero.png"));
-            var source = new Bitmap(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\PlayerPicture.png"));
-            playerFrames = new PlayerFrames(source, 1, 168, 4);
+            Model = new Bitmap(Path.Combine(new DirectoryInfo(
+                Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\MainHero.png"));
+            var source = new Bitmap(Path.Combine(new DirectoryInfo(
+                Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\PlayerPicture.png"));
+            PlayerFrames = new PlayerFrames(source, 1, 168, 4);
+
+            var footStepSound = new FileInfo(Path.Combine(new DirectoryInfo(
+                Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\Sounds\\PlayerSounds\\footsteps.wav"));
+            PlayerSounds = new EntitySounds(footStepSound);
         }
         public Image Model { get; }
         
-        public PlayerFrames playerFrames { get; }
+        public PlayerFrames PlayerFrames { get; }
+
+        public EntitySounds PlayerSounds { get; }
+
         public int X { get; set; }
         public int Y { get; set; }
         public int DirX { get; set; }
