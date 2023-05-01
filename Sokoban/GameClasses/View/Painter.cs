@@ -25,6 +25,11 @@ namespace Sokoban.GameClasses.View
             }
             AnimatePlayer(map, graphics);
             graphics.DrawImage(map.Box.Model, map.Box.X, map.Box.Y);
+            graphicsPlayer.DrawImage(map.Player.Model, map.Player.X, map.Player.Y);
+            foreach (var box in map.Boxes)
+            {
+                graphicsBox.DrawImage(box.Model, box.X, box.Y);
+            }
         }
 
         public static void AnimatePlayer(Map map, Graphics g)
@@ -56,6 +61,7 @@ namespace Sokoban.GameClasses.View
             }
             bmp.Dispose();
             return listFrames;
+            
         }
     }
 }
