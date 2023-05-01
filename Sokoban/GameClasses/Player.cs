@@ -21,11 +21,6 @@ namespace Sokoban
             PlayerSounds = new EntitySounds(footStepSound);
         }
         public Image Model { get; }
-        
-        public PlayerFrames PlayerFrames { get; set; }
-
-        public EntitySounds PlayerSounds { get; }
-
         public int X { get; set; }
         public int Y { get; set; }
         public int DirX { get; set; }

@@ -55,9 +55,11 @@ namespace Sokoban.GameClasses.View
                 }
                 listFrames.Add(frames.ToArray());
             }
-            bmp.Dispose();
-            return listFrames;
-            
+            graphicsPlayer.DrawImage(map.Player.Model, map.Player.X, map.Player.Y);
+            foreach (var box in map.Boxes)
+            {
+                graphicsBox.DrawImage(box.Model, box.X, box.Y);
+            }
         }
     }
 }
