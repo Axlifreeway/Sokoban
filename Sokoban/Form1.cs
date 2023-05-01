@@ -31,12 +31,13 @@ namespace Sokoban
             timer1.Interval = 100;
             timer1.Tick += new EventHandler(Update);
             KeyDown += new KeyEventHandler(OnPress);
-            GameInitialisation();           
+
+            GameInitialisation(Levels.currentLevel);
         }
 
-        public void GameInitialisation()
+        public static void GameInitialisation(int level)
         {
-            map = new Map(Levels.level_2);
+            map = new Map(Levels.GetLevel(level));
             Painter.start = new Point(map.Player.X, map.Player.Y);
             timer1.Start();
         }

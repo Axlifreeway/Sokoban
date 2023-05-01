@@ -11,9 +11,13 @@ namespace Sokoban
 {
     public class Cell
     {
-        public Cell() { }
-        public float X { get; set; }
-        public float Y { get; set; }
+        public Cell(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+        public int X { get; set; }
+        public int Y { get; set; }
         public CellType Type { get; set; }
         
         public Image GetModel()
