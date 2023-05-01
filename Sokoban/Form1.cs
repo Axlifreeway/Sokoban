@@ -17,8 +17,8 @@ namespace Sokoban
 {
     public partial class Form1 : Form
     {
-        public Timer timer1 = new Timer();
-        public Map map;
+        public static Timer timer1 = new Timer();
+        public static Map map;
 
         public Form1()
         {
@@ -27,12 +27,12 @@ namespace Sokoban
             timer1.Tick += new EventHandler(Update);
             KeyDown += new KeyEventHandler(OnPress);
 
-            GameInitialisation();
+            GameInitialisation(Levels.currentLevel);
         }
 
-        public void GameInitialisation()
+        public static void GameInitialisation(int level)
         {
-            map = new Map(Levels.level_1);
+            map = new Map(Levels.GetLevel(level));
             timer1.Start();
         }
 
