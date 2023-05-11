@@ -13,7 +13,7 @@ namespace Sokoban.GameClasses.Servis
         public static bool PlayerMove(KeyEventArgs e, Map map)
         {
             Player player = map.Player;
-            bool move = false;
+            bool move;
             switch (e.KeyCode)
             {
                 case Keys.Up:
