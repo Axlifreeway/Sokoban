@@ -11,7 +11,6 @@ namespace Sokoban.GameClasses.View
     public class Painter
     {
         public static Point start;        
-        public static int idCurrentFrame;
 
         public static void Paint(object sender, PaintEventArgs e, Map map)
         {
@@ -31,9 +30,10 @@ namespace Sokoban.GameClasses.View
         public static void AnimatePlayer(Map map, Graphics g)
         {
             var p = map.Player;
+            var idCurrentFrame = p.PlayerFrames.CurrentFrame;
             start.X += 21 * idCurrentFrame * map.Player.DirX;
             start.Y += 21 * idCurrentFrame * map.Player.DirY;
-            g.DrawImage(p.PlayerFrames[p.Direction, idCurrentFrame], start);
+            g.DrawImage(p.PlayerFrames[p.Direction, idCurrentFrame], start);         
         }
 
         public static List<Bitmap[]> getFrames(Bitmap bmp, Rectangle selection, int countFrames, int dx, int dy)

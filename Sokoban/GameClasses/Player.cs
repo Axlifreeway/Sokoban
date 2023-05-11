@@ -22,7 +22,7 @@ namespace Sokoban
         }
         public Image Model { get; }
         
-        public PlayerFrames PlayerFrames { get; }
+        public PlayerFrames PlayerFrames { get; set; }
 
         public EntitySounds PlayerSounds { get; }
 

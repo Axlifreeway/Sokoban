@@ -11,10 +11,33 @@ namespace Sokoban.GameClasses.View
     public class PlayerFrames
     {
         private int countFrames;
+        private int currentFrame;
         private Bitmap[] downFrames;
         private Bitmap[] upFrames;
         private Bitmap[] leftFrames;
         private Bitmap[] rightFrames;
+
+        public bool IsEndAnimate { get; private set; }
+
+        public int CurrentFrame 
+        {
+            get { return currentFrame; }
+            set
+            {
+                if (value < 0 || value > countFrames)
+                    throw new ArgumentOutOfRangeException("value");
+                if (value != countFrames)
+                {
+                    currentFrame = value;
+                    IsEndAnimate = false;                    
+                }
+                else
+                {
+                    currentFrame = 0;
+                    IsEndAnimate = true;
+                }
+            }
+        }
 
         public PlayerFrames(Bitmap sourse, int dx, int dy, int countFrames)
         {
@@ -31,8 +54,9 @@ namespace Sokoban.GameClasses.View
         {
             get
             {
-                if (i < 0 || i >= countFrames)
+                if ((i  < 0 || i >= countFrames))
                     throw new NotImplementedException();
+
                 switch (dir)
                 {
                     case Direction.Left:

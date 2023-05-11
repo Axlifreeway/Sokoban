@@ -45,16 +45,10 @@ namespace Sokoban
         {           
             if (IsKeyPress)
             {
-                Painter.idCurrentFrame += 1;                    
-                if (Painter.idCurrentFrame == 4)
-                {
-                    Painter.idCurrentFrame = 0;
-                    IsKeyPress = false;
-                }
-                if (Painter.idCurrentFrame == 2)
-                {
+                map.Player.PlayerFrames.CurrentFrame += 1;
+                IsKeyPress = !map.Player.PlayerFrames.IsEndAnimate;
+                if (map.Player.PlayerFrames.CurrentFrame == 2)
                     GameMusic.PlaySound(map.Player.PlayerSounds.FootStepSound);
-                }
                 GameMusic.StopMusic();
             }
             else
@@ -67,10 +61,7 @@ namespace Sokoban
         private void OnPress(object sender, KeyEventArgs e)
         {
             if (!IsKeyPress)
-            {
-                Painter.start = new Point(map.Player.X, map.Player.Y);
-                IsKeyPress = Controller.PlayerMove(e, map);
-            }                   
+                IsKeyPress = Controller.PlayerMove(e, map);                  
         }
 
         private void OnPaint(object sender, PaintEventArgs e)

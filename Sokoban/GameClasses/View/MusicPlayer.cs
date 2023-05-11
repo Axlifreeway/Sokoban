@@ -23,7 +23,7 @@ namespace Sokoban.GameClasses.View
         static GameMusic()
         {
             menuMediaList.Add(new FileInfo(
-                Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\menumusicpiano.wav")));
+                Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\415805__sunsai__menu-background-musicRobin Heijn.wav")));
             mediaPlayer.settings.volume = 100;
             //gameMediaList.Add(new FileInfo("3.wav"));
             //gameMediaList.Add(new FileInfo("4.mp3"));
@@ -44,7 +44,7 @@ namespace Sokoban.GameClasses.View
 
         public static void PlaySound(FileInfo sound)
         {
-            WMPLib.IWMPPlaylist playlist = mediaPlayer.playlistCollection.newPlaylist("myplaylist");
+            WMPLib.IWMPPlaylist playlist = mediaPlayer.playlistCollection.newPlaylist("lol");
             var media = mediaPlayer.newMedia(sound.FullName);
             playlist.appendItem(media);
             mediaPlayer.currentPlaylist = playlist;

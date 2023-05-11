@@ -18,6 +18,7 @@ namespace Sokoban.GameClasses
         }
         public Image Model { get; }
         public PlayerFrames PlayerFrames { get; }
+        public EntitySounds PlayerSounds { get; }
         public float X { get; set; }
         public float Y { get; set; }
 

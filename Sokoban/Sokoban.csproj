@@ -130,6 +130,7 @@
     <Content Include="Models\PlayerPicture.png" />
     <Content Include="Models\Wall.png" />
     <Content Include="Models\WinCell.png" />
+    <Content Include="Music\415805__sunsai__menu-background-musicRobin Heijn.wav" />
     <Content Include="Music\menumusicpiano.wav" />
     <Content Include="Music\Sounds\PlayerSounds\death.wav" />
     <Content Include="Music\Sounds\PlayerSounds\footsteps.wav" />
