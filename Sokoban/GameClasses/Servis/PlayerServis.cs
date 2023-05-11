@@ -42,6 +42,8 @@ namespace Sokoban.GameClasses.Servis
                 player.Y += y * player.DirY;
                 map[player.X / Levels.Width, player.Y / Levels.Height] = 3;
             }
+
+            return false;
         }
 
         public static void BoxMove(Map map, Box box)

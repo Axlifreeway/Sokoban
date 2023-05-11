@@ -13,7 +13,7 @@ namespace Sokoban.GameClasses.Servis
         public static bool PlayerMove(KeyEventArgs e, Map map)
         {
             Player player = map.Player;
-            bool move = false;
+            bool move;
             switch (e.KeyCode)
             {
                 case Keys.Up:
@@ -47,11 +47,7 @@ namespace Sokoban.GameClasses.Servis
                 if (map.Player.X == box.X && map.Player.Y == box.Y)
                     PlayerServis.BoxMove(map, box);
             }
-            foreach (var box in map.Boxes)
-            {
-                if (map.Player.X == box.X && map.Player.Y == box.Y)
-                    PlayerServis.BoxMove(map, box);
-            }
+            return move;
         }
     }
 }

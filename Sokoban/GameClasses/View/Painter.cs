@@ -23,12 +23,8 @@ namespace Sokoban.GameClasses.View
                     graphics.DrawImage(map.Cells[i, j].GetModel(), Levels.Size * i, Levels.Size * j);
                 }
             }
-            foreach (var box in map.Boxes)
-            {
-                graphics.DrawImage(box.Model, box.X, box.Y);
-            }
+            map.Boxes.ForEach(box => graphics.DrawImage(box.Model, box.X, box.Y));
             AnimatePlayer(map, graphics);
-            graphics.DrawImage(map.Mob.Model, map.Mob.X, map.Mob.Y);
         }
 
         public static void AnimatePlayer(Map map, Graphics g)
