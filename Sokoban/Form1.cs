@@ -20,7 +20,8 @@ namespace Sokoban
     {
         public static Timer timer1 = new Timer();
         public static bool IsKeyPress;
-        public Map map;
+        public static Map map;
+        public int TickCount = 0;
 
         public GameForm()
         {
@@ -43,7 +44,7 @@ namespace Sokoban
         }
 
         public void Update(object sender, EventArgs e)
-        {           
+        {
             if (IsKeyPress)
             {
                 map.Player.PlayerFrames.CurrentFrame += 1;
@@ -55,6 +56,12 @@ namespace Sokoban
             else
             {
                 Painter.start = new Point(map.Player.X, map.Player.Y);
+            }
+
+            if (++TickCount == 10)
+            {
+                Mob.Behavior(map);
+                TickCount = 0;
             }
             Invalidate();            
         }

@@ -16,6 +16,7 @@ namespace Sokoban
         public Cell[,] Cells { get; set; }
         public Player Player { get; set; }
         public List<Box> Boxes { get; set; }
+        public Mob Mob { get; set; }
 
         public List<Cell> Win { get; set; }
         public int Width { get; set; }
@@ -52,6 +53,7 @@ namespace Sokoban
                 {
                     if (map[i, j] == 3) Player = new Player(i * Levels.Width, j * Levels.Height);
                     if (map[i, j] == 2) Boxes.Add(new Box(i * Levels.Width, j * Levels.Height));
+                    if (map[i, j] == 6) Mob = new Mob(i * Levels.Width, j * Levels.Height, MobType.Strong);
                     Cells[i, j] = new Cell(i * Levels.Width, j * Levels.Height);
 
                     Cells[i, j].Type = (CellType)map[i, j];
@@ -76,7 +78,7 @@ namespace Sokoban
                 if (Levels.currentLevel != 4)
                 {
                     MessageBox.Show("Победа");
-                    Form1.GameInitialisation(++Levels.currentLevel);
+                    GameForm.GameInitialisation(++Levels.currentLevel);
                 }
                 else
                 {
