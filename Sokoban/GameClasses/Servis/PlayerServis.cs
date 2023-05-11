@@ -45,8 +45,7 @@ namespace Sokoban.GameClasses.Servis
                 map[player.X / Levels.Width, player.Y / Levels.Height] = 3;
             }
 
-            return (px + moveX >= 0 && px + moveX < map.Width) &&
-                py + moveY >= 0 && py + moveY < map.Height;
+            return false;
         }
 
         public static void BoxMove(Map map, Box box)
