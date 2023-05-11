@@ -1,6 +1,6 @@
 ﻿namespace Sokoban
 {
-    partial class Form1
+    partial class GameForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -37,7 +37,7 @@
             this.ClientSize = new System.Drawing.Size(896, 889);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Form1";
+            this.Name = "GameForm";
             this.Text = "Sokoban";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
             this.ResumeLayout(false);

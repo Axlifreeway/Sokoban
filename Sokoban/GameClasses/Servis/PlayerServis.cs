@@ -9,10 +9,12 @@ namespace Sokoban.GameClasses.Servis
 {
     internal class PlayerServis
     {
-        public static void Move(int x, int y, Map map, Player player)
+        public static bool Move(int x, int y, Map map, Player player)
         {
             int moveX = x * player.DirX;
             int moveY = y * player.DirY;
+            var px = player.X;
+            var py = player.Y;
             if (player.X + moveX > 0 && player.X + moveX < map.Width
                 && map[player.DirX + player.X / Levels.Width, player.Y / Levels.Height] != 4)
             {
@@ -42,6 +44,9 @@ namespace Sokoban.GameClasses.Servis
                 player.Y += y * player.DirY;
                 map[player.X / Levels.Width, player.Y / Levels.Height] = 3;
             }
+
+            return (px + moveX >= 0 && px + moveX < map.Width) &&
+                py + moveY >= 0 && py + moveY < map.Height;
         }
 
         public static void BoxMove(Map map, Box box)

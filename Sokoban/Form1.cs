@@ -12,18 +12,23 @@ using System.IO;
 using Sokoban.GameClasses;
 using Sokoban.GameClasses.Servis;
 using Sokoban.GameClasses.View;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Sokoban
 {
-    public partial class Form1 : Form
+    public partial class GameForm : Form
     {
         public static Timer timer1 = new Timer();
-        public static Map map;
+        public static bool IsKeyPress;
+        public Map map;
 
-        public Form1()
+        public GameForm()
         {
             InitializeComponent();
-            timer1.Interval = 1;
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            timer1.Interval = 100;
             timer1.Tick += new EventHandler(Update);
             KeyDown += new KeyEventHandler(OnPress);
 
@@ -32,22 +37,33 @@ namespace Sokoban
 
         public static void GameInitialisation(int level)
         {
+            
+            Painter.start = new Point(map.Player.X, map.Player.Y);
             map = new Map(Levels.GetLevel(level));
             timer1.Start();
         }
 
         public void Update(object sender, EventArgs e)
-        {
-            Invalidate();
+        {           
+            if (IsKeyPress)
+            {
+                map.Player.PlayerFrames.CurrentFrame += 1;
+                IsKeyPress = !map.Player.PlayerFrames.IsEndAnimate;
+                if (map.Player.PlayerFrames.CurrentFrame == 2)
+                    GameMusic.PlaySound(map.Player.PlayerSounds.FootStepSound);
+                GameMusic.StopMusic();
+            }
+            else
+            {
+                Painter.start = new Point(map.Player.X, map.Player.Y);
+            }
+            Invalidate();            
         }
 
-        private void CheckOnPush(object sender, EventArgs e)
-        {
-            
-        }
         private void OnPress(object sender, KeyEventArgs e)
         {
-            Controller.PlayerMove(e, map);           
+            if (!IsKeyPress)
+                IsKeyPress = Controller.PlayerMove(e, map);                  
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
