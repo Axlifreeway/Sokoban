@@ -11,27 +11,61 @@ namespace Sokoban.GameClasses.Servis
     {
         public static void Move(int x, int y, Map map, Player player)
         {
-            float moveX = x * player.DirX;
-            float moveY = y * player.DirY;
-            if (player.X + moveX >= 0 && player.X + moveX < map.Width)
+            int moveX = x * player.DirX;
+            int moveY = y * player.DirY;
+            if (player.X + moveX > 0 && player.X + moveX < map.Width
+                && map[player.DirX + player.X / Levels.Width, player.Y / Levels.Height] != 4)
+            {
+                foreach (var box in map.Boxes)
+                {
+                    if (player.X + moveX == box.X && player.Y  == box.Y
+                        && (map[player.DirX + box.X / Levels.Width, box.Y / Levels.Height] == 4
+                        || map[player.DirX + box.X / Levels.Width, box.Y / Levels.Height] == 2))
+                        return;
+                }
+                map[player.X / Levels.Width, player.Y / Levels.Height] = 0;
                 player.X += moveX;
-            if (player.Y + moveY >= 0 && player.Y + moveY < map.Height)
-                player.Y += y * player.DirY;
-        }
-        public static void BoxMove(Map map)
-        {
-            if (map.Player.DirX * Levels.Width + map.Box.X < map.Width && map.Player.DirX * Levels.Width + map.Box.X > 0
-                && map.Cells[map.Player.DirX + map.Box.X / Levels.Width, map.Box.Y / Levels.Height].Type != CellType.Wall)
-            {
-                map.Box.X += map.Player.DirX * Levels.Width;
+                map[player.X / Levels.Width, player.Y / Levels.Height] = 3;
             }
-                
 
-            if (map.Player.DirY * Levels.Height + map.Box.Y < map.Height && map.Player.DirY * Levels.Height + map.Box.Y > 0
-                && map.Cells[map.Box.X / Levels.Width, map.Box.Y / Levels.Height + map.Player.DirY].Type != CellType.Wall)
+            if (player.Y + moveY > 0 && player.Y + moveY < map.Height
+                && map[player.X / Levels.Width, player.Y / Levels.Height + player.DirY] != 4)
             {
-                map.Box.Y += map.Player.DirY * Levels.Height;
+                foreach (var box in map.Boxes)
+                {
+                    if (player.X == box.X && player.Y + moveY == box.Y 
+                    && (map[box.X / Levels.Width, box.Y / Levels.Height + player.DirY] == 4
+                    || map[box.X / Levels.Width, box.Y / Levels.Height + player.DirY] == 2))
+                        return;
+                }
+                map[player.X / Levels.Width, player.Y / Levels.Height] = 0;
+                player.Y += y * player.DirY;
+                map[player.X / Levels.Width, player.Y / Levels.Height] = 3;
             }
+        }
+
+        public static void BoxMove(Map map, Box box)
+        {
+            if (map.Player.DirX * Levels.Width + box.X < map.Width && map.Player.DirX * Levels.Width + box.X > 0
+                && map[map.Player.DirX + box.X / Levels.Width, box.Y / Levels.Height] != 4
+                && map[map.Player.DirX + box.X / Levels.Width, box.Y / Levels.Height] != 2)
+            {
+                map[box.X / Levels.Width, box.Y / Levels.Height] = 3;
+                box.X += map.Player.DirX * Levels.Width;
+                map[box.X / Levels.Width, box.Y / Levels.Height] = 2;
+            }
+
+
+            if (map.Player.DirY * Levels.Height + box.Y < map.Height && map.Player.DirY * Levels.Height + box.Y > 0
+                && map[box.X / Levels.Width, box.Y / Levels.Height + map.Player.DirY] != 4
+                && map[box.X / Levels.Width, box.Y / Levels.Height + map.Player.DirY] != 2)
+            {
+                map[box.X / Levels.Width, box.Y / Levels.Height] = 3;
+                box.Y += map.Player.DirY * Levels.Height;
+                map[box.X / Levels.Width, box.Y / Levels.Height] = 2;
+            }
+
+            map.CheckOnWin();
         }
     }
 }

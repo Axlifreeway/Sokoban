@@ -17,8 +17,8 @@ namespace Sokoban.GameClasses
             Model = model;
         }
         public Image Model { get; }
-        public float X { get; set; }
-        public float Y { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
         public abstract bool IsDead { get; set; }
     }
 }

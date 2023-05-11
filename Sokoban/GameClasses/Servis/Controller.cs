@@ -38,8 +38,11 @@ namespace Sokoban.GameClasses.Servis
                 default:
                     break;
             }
-            if (map.Player.X == map.Box.X && map.Player.Y == map.Box.Y)
-                PlayerServis.BoxMove(map);
+            foreach (var box in map.Boxes)
+            {
+                if (map.Player.X == box.X && map.Player.Y == box.Y)
+                    PlayerServis.BoxMove(map, box);
+            }
         }
     }
 }
