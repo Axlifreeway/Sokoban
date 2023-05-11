@@ -23,7 +23,7 @@ namespace Sokoban.GameClasses.Servis
                     if (player.X + moveX == box.X && player.Y  == box.Y
                         && (map[player.DirX + box.X / Levels.Width, box.Y / Levels.Height] == 4
                         || map[player.DirX + box.X / Levels.Width, box.Y / Levels.Height] == 2))
-                        return;
+                        return false;
                 }
                 map[player.X / Levels.Width, player.Y / Levels.Height] = 0;
                 player.X += moveX;
@@ -38,15 +38,14 @@ namespace Sokoban.GameClasses.Servis
                     if (player.X == box.X && player.Y + moveY == box.Y 
                     && (map[box.X / Levels.Width, box.Y / Levels.Height + player.DirY] == 4
                     || map[box.X / Levels.Width, box.Y / Levels.Height + player.DirY] == 2))
-                        return;
+                        return false;
                 }
                 map[player.X / Levels.Width, player.Y / Levels.Height] = 0;
                 player.Y += y * player.DirY;
                 map[player.X / Levels.Width, player.Y / Levels.Height] = 3;
             }
 
-            return (px + moveX >= 0 && px + moveX < map.Width) &&
-                py + moveY >= 0 && py + moveY < map.Height;
+            return false;
         }
 
         public static void BoxMove(Map map, Box box)

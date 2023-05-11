@@ -76,7 +76,7 @@ namespace Sokoban
                 if (Levels.currentLevel != 4)
                 {
                     MessageBox.Show("Победа");
-                    Form1.GameInitialisation(++Levels.currentLevel);
+                    GameForm.GameInitialisation(++Levels.currentLevel);
                 }
                 else
                 {

@@ -20,7 +20,7 @@ namespace Sokoban
     {
         public static Timer timer1 = new Timer();
         public static bool IsKeyPress;
-        public Map map;
+        public static Map map;
 
         public GameForm()
         {
@@ -37,9 +37,8 @@ namespace Sokoban
 
         public static void GameInitialisation(int level)
         {
-            
-            Painter.start = new Point(map.Player.X, map.Player.Y);
             map = new Map(Levels.GetLevel(level));
+            Painter.start = new Point(map.Player.X, map.Player.Y);         
             timer1.Start();
         }
 
