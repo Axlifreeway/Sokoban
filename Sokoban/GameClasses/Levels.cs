@@ -10,8 +10,7 @@ namespace Sokoban
     public static class Levels
     {
         public static int currentLevel = 1;
-        public static int Width = 128;
-        public static int Height = 128;
+        public static int Size = 128;
 
         public static int[,] level_1 = new int[,]
         {

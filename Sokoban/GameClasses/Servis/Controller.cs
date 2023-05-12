@@ -36,9 +36,6 @@ namespace Sokoban.GameClasses.Servis
                     player.DirX = 1;
                     move = PlayerServis.Move(map, player);
                     break;
-                case Keys.R:
-                    GameForm.GameInitialisation(Levels.currentLevel);
-                    break;
                 default:
                     return false;                   
             }

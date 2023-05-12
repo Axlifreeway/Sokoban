@@ -25,8 +25,8 @@ namespace Sokoban
         public Map(int[,] map)
         {
             this.map = map;
-            Width = map.GetLength(0) * Levels.Width;
-            Height = map.GetLength(1) * Levels.Height;
+            Width = map.GetLength(0) * Levels.Size;
+            Height = map.GetLength(1) * Levels.Size;
             Boxes = new List<Box>();
             Win = new List<Cell>();
             Init(map);
@@ -52,10 +52,10 @@ namespace Sokoban
             {
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
-                    if (map[i, j] == 3) Player = new Player(i * Levels.Width, j * Levels.Height);
-                    if (map[i, j] == 2) Boxes.Add(new Box(i * Levels.Width, j * Levels.Height));
-                    if (map[i, j] == 6) Mob = new Mob(i * Levels.Width, j * Levels.Height, MobType.Strong);
-                    Cells[i, j] = new Cell(i * Levels.Width, j * Levels.Height);
+                    if (map[i, j] == 3) Player = new Player(i * Levels.Size, j * Levels.Size);
+                    if (map[i, j] == 2) Boxes.Add(new Box(i * Levels.Size, j * Levels.Size));
+                    if (map[i, j] == 6) Mob = new Mob(i * Levels.Size, j * Levels.Size, MobType.Strong);
+                    Cells[i, j] = new Cell(i * Levels.Size, j * Levels.Size);
 
                     Cells[i, j].Type = (CellType)map[i, j];
                     if (Cells[i, j].Type == CellType.Win) Win.Add(Cells[i, j]);
