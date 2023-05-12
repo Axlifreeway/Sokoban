@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sokoban.GameClasses.View;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -11,14 +12,35 @@ namespace Sokoban.GameClasses
 {
     public abstract class Entity
     {
-        public Entity(int x, int y, Image model)
+        public Entity(int x, int y)
         {
             X = x; Y = y;
-            Model = model;
         }
         public Image Model { get; }
-        public int X { get; set; }
-        public int Y { get; set; }
+        public PlayerFrames PlayerFrames { get; }
+        public EntitySounds PlayerSounds { get; }
+        public float X { get; set; }
+        public float Y { get; set; }
+
+        public int DirX { get; set; }
+        public int DirY { get; set; }
+
+        public Direction Direction
+        {
+            get
+            {
+                if (DirX == 0 && DirY == 1)
+                    return Direction.Down;
+                else if (DirX == 0 && DirY == -1)
+                    return Direction.Up;
+                else if (DirX == 1 && DirY == 0)
+                    return Direction.Right;
+                else if (DirX == -1 && DirY == 0)
+                    return Direction.Left;
+                else return Direction.Down;
+            }
+        }
+
         public abstract bool IsDead { get; set; }
     }
 }
