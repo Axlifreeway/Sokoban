@@ -13,7 +13,7 @@ namespace Sokoban.GameClasses.Servis
         public static bool PlayerMove(KeyEventArgs e, Map map)
         {
             Player player = map.Player;
-            bool move;
+            bool move = false;
             switch (e.KeyCode)
             {
                 case Keys.Up:
@@ -35,6 +35,9 @@ namespace Sokoban.GameClasses.Servis
                     player.DirY = 0;
                     player.DirX = 1;
                     move = PlayerServis.Move(map, player);
+                    break;
+                case Keys.R:
+                    GameForm.GameInitialisation(Levels.currentLevel);
                     break;
                 default:
                     return false;                   
