@@ -20,7 +20,7 @@ namespace Sokoban.GameClasses.View
             {
                 for (int j = 0; j < map.Cells.GetLength(1); j++)
                 {
-                    graphics.DrawImage(map.Cells[i, j].GetModel(), Levels.Width * i, Levels.Height * j);
+                    graphics.DrawImage(map.Cells[i, j].GetModel(), Levels.Size * i, Levels.Size * j);
                 }
             }
             map.Boxes.ForEach(box => graphics.DrawImage(box.Model, box.X, box.Y));
