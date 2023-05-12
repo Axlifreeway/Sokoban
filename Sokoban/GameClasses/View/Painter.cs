@@ -20,7 +20,7 @@ namespace Sokoban.GameClasses.View
             {
                 for (int j = 0; j < map.Cells.GetLength(1); j++)
                 {
-                    graphics.DrawImage(map.Cells[i, j].GetModel(), Levels.Width * i, Levels.Height * j);
+                    graphics.DrawImage(map.Cells[i, j].GetModel(), Levels.Size * i, Levels.Size * j);
                 }
             }
 
@@ -29,7 +29,6 @@ namespace Sokoban.GameClasses.View
                 graphics.DrawImage(box.Model, box.X, box.Y);
             }
             AnimatePlayer(map, graphics);
-            graphics.DrawImage(map.Mob.Model, map.Mob.X, map.Mob.Y);
 
         }
 

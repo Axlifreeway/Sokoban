@@ -12,7 +12,7 @@ namespace Sokoban
 {
     public class Map
     {
-        public int[,] map;
+        public Cell[,] DynamicMap { get; set; }
         public Cell[,] Cells { get; set; }
         public Player Player { get; set; }
         public List<Box> Boxes { get; set; }
@@ -24,39 +24,40 @@ namespace Sokoban
 
         public Map(int[,] map)
         {
-            this.map = map;
-            Width = map.GetLength(0) * Levels.Width;
-            Height = map.GetLength(1) * Levels.Height;
+            Width = map.GetLength(0) * Levels.Size;
+            Height = map.GetLength(1) * Levels.Size;
             Boxes = new List<Box>();
             Win = new List<Cell>();
             Init(map);
         }
 
-        public int this[int x, int y]
+        public Cell this[int x, int y]
         {
             get
             {
-                return map[x, y];
+                return DynamicMap[x, y];
             }
             set
             {
-                map[x, y] = value;
+                DynamicMap[x, y] = value;
             }
         }
 
         public void Init(int[,] map)
         {
             Cells = new Cell[map.GetLength(0), map.GetLength(1)];
+            DynamicMap = new Cell[map.GetLength(0), map.GetLength(1)];
             for (int i = 0; i < map.GetLength(0); i++)
             {
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
-                    if (map[i, j] == 3) Player = new Player(i * Levels.Width, j * Levels.Height);
-                    if (map[i, j] == 2) Boxes.Add(new Box(i * Levels.Width, j * Levels.Height));
-                    if (map[i, j] == 6) Mob = new Mob(i * Levels.Width, j * Levels.Height, MobType.Strong);
-                    Cells[i, j] = new Cell(i * Levels.Width, j * Levels.Height);
-
+                    if (map[i, j] == 3) Player = new Player(i * Levels.Size, j * Levels.Size);
+                    if (map[i, j] == 2) Boxes.Add(new Box(i * Levels.Size, j * Levels.Size));
+                    if (map[i, j] == 6) Mob = new Mob(i * Levels.Size, j * Levels.Size, MobType.Strong);
+                    Cells[i, j] = new Cell(i * Levels.Size, j * Levels.Size);
+                    DynamicMap[i, j] = new Cell(i * Levels.Size, j * Levels.Size);
                     Cells[i, j].Type = (CellType)map[i, j];
+                    DynamicMap[i, j].Type = (CellType)map[i, j];
                     if (Cells[i, j].Type == CellType.Win) Win.Add(Cells[i, j]);
                 }
             }
@@ -75,7 +76,7 @@ namespace Sokoban
             }
             if (count == Boxes.Count)
             {
-                if (Levels.currentLevel != 4)
+                if (Levels.currentLevel != Levels.LevelsCount)
                 {
                     MessageBox.Show("Победа");
                     GameForm.GameInitialisation(++Levels.currentLevel);

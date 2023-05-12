@@ -13,28 +13,31 @@ namespace Sokoban.GameClasses.Servis
         public static bool PlayerMove(KeyEventArgs e, Map map)
         {
             Player player = map.Player;
-            bool move;
+            bool move = false;
             switch (e.KeyCode)
             {
                 case Keys.Up:
                     player.DirY = -1;
                     player.DirX = 0;
-                    move = PlayerServis.Move(0, 128, map, player);
+                    move = PlayerServis.Move(map, player);
                     break;
                 case Keys.Down:
                     player.DirY = 1;
                     player.DirX = 0;
-                    move = PlayerServis.Move(0, 128, map, player);
+                    move = PlayerServis.Move(map, player);
                     break;
                 case Keys.Left:
                     player.DirY = 0;
                     player.DirX = -1;
-                    move = PlayerServis.Move(128, 0, map, player);
+                    move = PlayerServis.Move(map, player);
                     break;
                 case Keys.Right:
                     player.DirY = 0;
                     player.DirX = 1;
-                    move = PlayerServis.Move(128, 0, map, player);
+                    move = PlayerServis.Move(map, player);
+                    break;
+                case Keys.R:
+                    GameForm.GameInitialisation(Levels.currentLevel);
                     break;
                 default:
                     return false;                   
