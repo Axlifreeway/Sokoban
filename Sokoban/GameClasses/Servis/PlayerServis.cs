@@ -13,6 +13,7 @@ namespace Sokoban.GameClasses.Servis
         {
             int moveX = Levels.Size * player.DirX;
             int moveY = Levels.Size * player.DirY;
+            bool IsMove = false;
             if (player.X + moveX > 0 && player.X + moveX < map.Width
                 && player.Y + moveY > 0 && player.Y + moveY < map.Height
                 && map[player.DirX + player.X / Levels.Size, player.DirY + player.Y / Levels.Size].Type != CellType.Wall)
@@ -28,8 +29,9 @@ namespace Sokoban.GameClasses.Servis
                 player.X += moveX;
                 player.Y += moveY;
                 map[player.X / Levels.Size, player.Y / Levels.Size].Type = CellType.Player;
+                IsMove = true;
             }
-            return false;
+            return IsMove;
         }
 
         public static void BoxMove(Map map, Box box)
