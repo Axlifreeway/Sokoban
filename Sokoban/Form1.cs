@@ -21,6 +21,8 @@ namespace Sokoban
         public static Timer timer1 = new Timer();
         public static bool IsKeyPress;
         public static Map map;
+        public int TickCount = 0;
+
 
         public GameForm()
         {
