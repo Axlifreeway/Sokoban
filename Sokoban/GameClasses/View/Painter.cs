@@ -25,7 +25,7 @@ namespace Sokoban.GameClasses.View
             }
             map.Boxes.ForEach(box => graphics.DrawImage(box.Model, box.X, box.Y));
             AnimatePlayer(map, graphics);
-            graphics.DrawImage(map.Mob.Model, map.Mob.X, map.Mob.Y);
+            if (map.Mob != null ) graphics.DrawImage(map.Mob.Model, map.Mob.X, map.Mob.Y);
         }
 
         public static void AnimatePlayer(Map map, Graphics g)
