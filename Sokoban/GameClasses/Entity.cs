@@ -17,30 +17,8 @@ namespace Sokoban.GameClasses
             X = x; Y = y;
         }
         public Image Model { get; }
-        public PlayerFrames PlayerFrames { get; }
-        public EntitySounds PlayerSounds { get; }
-        public float X { get; set; }
-        public float Y { get; set; }
-
-        public int DirX { get; set; }
-        public int DirY { get; set; }
-
-        public Direction Direction
-        {
-            get
-            {
-                if (DirX == 0 && DirY == 1)
-                    return Direction.Down;
-                else if (DirX == 0 && DirY == -1)
-                    return Direction.Up;
-                else if (DirX == 1 && DirY == 0)
-                    return Direction.Right;
-                else if (DirX == -1 && DirY == 0)
-                    return Direction.Left;
-                else return Direction.Down;
-            }
-        }
-
+        public int X { get; set; }
+        public int Y { get; set; }
         public abstract bool IsDead { get; set; }
     }
 }

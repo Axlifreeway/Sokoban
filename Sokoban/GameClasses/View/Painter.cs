@@ -20,11 +20,12 @@ namespace Sokoban.GameClasses.View
             {
                 for (int j = 0; j < map.Cells.GetLength(1); j++)
                 {
-                    graphics.DrawImage(map.Cells[i, j].GetModel(), Levels.Width * i, Levels.Height * j);
+                    graphics.DrawImage(map.Cells[i, j].GetModel(), Levels.Size * i, Levels.Size * j);
                 }
             }
+            map.Boxes.ForEach(box => graphics.DrawImage(box.Model, box.X, box.Y));
             AnimatePlayer(map, graphics);
-            graphics.DrawImage(map.Box.Model, map.Box.X, map.Box.Y);
+            graphics.DrawImage(map.Mob.Model, map.Mob.X, map.Mob.Y);
         }
 
         public static void AnimatePlayer(Map map, Graphics g)
@@ -36,7 +37,7 @@ namespace Sokoban.GameClasses.View
             g.DrawImage(p.PlayerFrames[p.Direction, idCurrentFrame], start);         
         }
 
-        public static List<Bitmap[]> getFrames(Bitmap bmp, Rectangle selection, int countFrames, int dx, int dy)
+        public static List<Bitmap[]> GetFrames(Bitmap bmp, Rectangle selection, int countFrames, int dx, int dy)
         {
             var frames = new Bitmap[countFrames];
             var listFrames = new List<Bitmap[]>();
@@ -56,6 +57,7 @@ namespace Sokoban.GameClasses.View
             }
             bmp.Dispose();
             return listFrames;
+            
         }
     }
 }

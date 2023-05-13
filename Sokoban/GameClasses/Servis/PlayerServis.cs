@@ -9,33 +9,46 @@ namespace Sokoban.GameClasses.Servis
 {
     internal class PlayerServis
     {
-        public static bool Move(int x, int y, Map map, Player player)
+        public static bool Move(Map map, Player player)
         {
-            var moveX = x * player.DirX;
-            var moveY = y * player.DirY;
-            var px = player.X;
-            var py = player.Y;
-            if (player.X + moveX >= 0 && player.X + moveX < map.Width)
-                player.X += moveX;             
-            if (player.Y + moveY >= 0 && player.Y + moveY < map.Height)
+            int moveX = Levels.Size * player.DirX;
+            int moveY = Levels.Size * player.DirY;
+            bool IsMove = false;
+            if (player.X + moveX > 0 && player.X + moveX < map.Width
+                && player.Y + moveY > 0 && player.Y + moveY < map.Height
+                && map[player.DirX + player.X / Levels.Size, player.DirY + player.Y / Levels.Size].Type != CellType.Wall)
+            {
+                foreach (var box in map.Boxes)
+                {
+                    if (player.X + moveX == box.X && player.Y + moveY == box.Y
+                        && (map[player.DirX + box.X / Levels.Size, player.DirY + box.Y / Levels.Size].Type == CellType.Wall
+                        || map[player.DirX + box.X / Levels.Size, player.DirY + box.Y / Levels.Size].Type == CellType.Box))
+                        return false;
+                }
+                map[player.X / Levels.Size, player.Y / Levels.Size].Type = CellType.Classic;
+                player.X += moveX;
                 player.Y += moveY;
-            return (px + moveX >= 0 && px + moveX < map.Width) &&
-                py + moveY >= 0 && py + moveY < map.Height;
+                map[player.X / Levels.Size, player.Y / Levels.Size].Type = CellType.Player;
+                IsMove = true;
+            }
+            return IsMove;
         }
-        public static void BoxMove(Map map)
+
+        public static void BoxMove(Map map, Box box)
         {
-            if (map.Player.DirX * Levels.Width + map.Box.X < map.Width && map.Player.DirX * Levels.Width + map.Box.X > 0
-                && map.Cells[map.Player.DirX + map.Box.X / Levels.Width, map.Box.Y / Levels.Height].Type != CellType.Wall)
+            int moveX = Levels.Size * map.Player.DirX;
+            int moveY = Levels.Size * map.Player.DirY;
+            if (moveX + box.X < map.Width && moveX + box.X > 0
+                && moveY + box.Y < map.Height && moveY + box.Y > 0
+                && map[map.Player.DirX + box.X / Levels.Size, map.Player.DirY + box.Y / Levels.Size].Type != CellType.Wall
+                && map[map.Player.DirX + box.X / Levels.Size, map.Player.DirY + box.Y / Levels.Size].Type != CellType.Box)
             {
-                map.Box.X2 = map.Box.X;
-                map.Box.X += map.Player.DirX * Levels.Width;
+                map[box.X / Levels.Size, box.Y / Levels.Size].Type = CellType.Player;
+                box.X += moveX;
+                box.Y += moveY;
+                map[box.X / Levels.Size, box.Y / Levels.Size].Type = CellType.Box;
             }
-            if (map.Player.DirY * Levels.Height + map.Box.Y < map.Height && map.Player.DirY * Levels.Height + map.Box.Y > 0
-                && map.Cells[map.Box.X / Levels.Width, map.Box.Y / Levels.Height + map.Player.DirY].Type != CellType.Wall)
-            {
-                map.Box.Y2 = map.Box.Y;
-                map.Box.Y += map.Player.DirY * Levels.Height;
-            }
+            map.CheckOnWin();
         }
     }
 }

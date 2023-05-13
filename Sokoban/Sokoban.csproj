@@ -14,6 +14,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameClasses\Mob.cs" />
+    <Compile Include="GameClasses\MobType.cs" />
     <Compile Include="GameClasses\View\EntitySounds.cs" />
     <Compile Include="GameClasses\View\MusicPlayer.cs" />
     <Compile Include="Menu\AuthorsForm.cs">
@@ -109,6 +112,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -128,6 +132,7 @@
     <Content Include="Models\Classic.png" />
     <Content Include="Models\MainHero.png" />
     <Content Include="Models\PlayerPicture.png" />
+    <Content Include="Models\StrongMob.png" />
     <Content Include="Models\Wall.png" />
     <Content Include="Models\WinCell.png" />
     <Content Include="Music\415805__sunsai__menu-background-musicRobin Heijn.wav" />
