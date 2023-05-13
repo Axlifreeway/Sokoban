@@ -23,9 +23,6 @@ namespace Sokoban
         public static Map map;
         public int TickCount = 0;
 
-        public int TickCount = 0;
-
-
         public GameForm()
         {
             InitializeComponent();
