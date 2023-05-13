@@ -59,5 +59,14 @@ namespace Sokoban.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 1.
+        /// </summary>
+        internal static string level {
+            get {
+                return ResourceManager.GetString("level", resourceCulture);
+            }
+        }
     }
 }

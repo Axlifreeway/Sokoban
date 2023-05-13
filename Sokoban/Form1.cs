@@ -80,5 +80,9 @@ namespace Sokoban
         {
             Painter.Paint(sender, e, map);
         }
+
+        private void GameForm_Leave(object sender, EventArgs e)
+        {
+        }
     }
 }

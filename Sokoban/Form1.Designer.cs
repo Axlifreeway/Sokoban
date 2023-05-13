@@ -30,7 +30,7 @@
         {
             this.SuspendLayout();
             // 
-            // Form1
+            // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -40,6 +40,7 @@
             this.Name = "GameForm";
             this.Text = "Sokoban";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
+            this.Leave += new System.EventHandler(this.GameForm_Leave);
             this.ResumeLayout(false);
 
         }
