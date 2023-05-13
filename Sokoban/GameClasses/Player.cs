@@ -26,6 +26,10 @@ namespace Sokoban
         public int DirX { get; set; }
         public int DirY { get; set; }
 
+        public PlayerFrames PlayerFrames { get; set; }
+
+        public EntitySounds PlayerSounds { get; set; }
+
         public Direction Direction
         {
             get
