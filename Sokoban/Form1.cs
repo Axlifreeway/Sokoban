@@ -23,6 +23,9 @@ namespace Sokoban
         public static Map map;
         public int TickCount = 0;
 
+        public int TickCount = 0;
+
+
         public GameForm()
         {
             InitializeComponent();
@@ -39,7 +42,9 @@ namespace Sokoban
         public static void GameInitialisation(int level)
         {
             map = new Map(Levels.GetLevel(level));
-            Painter.start = new Point(map.Player.X, map.Player.Y);         
+
+            Painter.start = new Point(map.Player.X, map.Player.Y);     
+
             timer1.Start();
         }
 
