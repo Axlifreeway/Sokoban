@@ -11,11 +11,7 @@ namespace Sokoban
 {
     public class Cell:Entity
     {
-        public Cell(int x, int y):base(x, y)
-        {
-            X = x;
-            Y = y;
-        }
+        public Cell(int x, int y) : base(x, y) { }
         public CellType Type { get; set; }
         public override bool IsDead { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 

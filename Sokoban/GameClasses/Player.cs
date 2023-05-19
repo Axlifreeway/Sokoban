@@ -8,8 +8,7 @@ namespace Sokoban
     public class Player:Entity
     {
         public Player(int x, int y):base(x, y)
-        {
-            X = x; Y = y;
+        {            
             Model = new Bitmap(Path.Combine(new DirectoryInfo(
                 Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\MainHero.png"));
             var source = new Bitmap(Path.Combine(new DirectoryInfo(

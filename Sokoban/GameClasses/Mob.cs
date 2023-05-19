@@ -12,8 +12,6 @@ namespace Sokoban.GameClasses
     {
         public Mob(int x, int y, MobType type):base(x, y)
         {
-            X = x;
-            Y = y;
             Type = type;
             if (Type == MobType.Strong)
                 Model = new Bitmap(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\StrongMob.png"));
@@ -46,8 +44,8 @@ namespace Sokoban.GameClasses
                 {
                     var currentCellX = X + 128 * i;
                     var currentCellY = Y + 128 * j;
-                    if (map.Width <= currentCellX || currentCellX < 0) break;
-                    if (map.Height <= currentCellY || currentCellY < 0) continue;
+                    if (map.Size.Width <= currentCellX || currentCellX < 0) break;
+                    if (map.Size.Height <= currentCellY || currentCellY < 0) continue;
                     if (currentCellX == player.X && currentCellY == player.Y)
                         return true;
                 }
@@ -110,9 +108,9 @@ namespace Sokoban.GameClasses
 
         public void Move(int moveX, int moveY, Map map)
         {
-            if (X + moveX >= 0 && X + moveX < map.Width)
+            if (X + moveX >= 0 && X + moveX < map.Size.Width)
                 X += moveX;
-            if (Y + moveY >= 0 && Y + moveY < map.Height)
+            if (Y + moveY >= 0 && Y + moveY < map.Size.Height)
                 Y += moveY;
         }
     }

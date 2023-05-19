@@ -18,7 +18,7 @@ namespace Sokoban
 {
     public partial class GameForm : Form
     {
-        public static Timer timer1 = new Timer();
+        public static Timer timer1;
         public static bool IsKeyPress;
         public static Map map;
 
@@ -28,6 +28,7 @@ namespace Sokoban
         public GameForm()
         {
             InitializeComponent();
+            timer1 = new Timer();
             this.SetStyle(ControlStyles.UserPaint, true);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);

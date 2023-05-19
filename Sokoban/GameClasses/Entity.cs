@@ -14,8 +14,7 @@ namespace Sokoban.GameClasses
     {
         public Entity(int x, int y)
         {
-            X = x;
-            Y = y;
+            X = x; Y = y;
         }
         public Image Model { get; protected set; }
         public PlayerFrames PlayerFrames { get; protected set; }
