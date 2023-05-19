@@ -37,7 +37,6 @@ namespace Sokoban.GameClasses.View
 
             for (int i = 0; i < map.Player.HP.Count; i++)
                 graphics.DrawImage(map.Player.HP[i].Model, 64 * i, 16);
-
         }
 
         public static void AnimatePlayer(Map map, Graphics g)
