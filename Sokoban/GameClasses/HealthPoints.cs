@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Sokoban.GameClasses
 {
-    internal class HealthPoints
+    public class HealthPoints
     {
         public HealthPoints() {
             Model = new Bitmap(Path.Combine(

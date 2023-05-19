@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using Sokoban.GameClasses;
 using Sokoban.GameClasses.View;
@@ -18,10 +19,14 @@ namespace Sokoban
             var footStepSound = new FileInfo(Path.Combine(new DirectoryInfo(
                 Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\Sounds\\PlayerSounds\\footsteps.wav"));
             PlayerSounds = new EntitySounds(footStepSound);
+
+            HP = new List<HealthPoints>();
+            for (int i = 0; i < 3; i++)
+                HP.Add(new HealthPoints());
         }
 
-        public static float HP { get; set; }
+        public List<HealthPoints> HP { get; set; }
 
-        public override bool IsDead { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public override bool IsDead { get => HP.Count > 0; }
     }
 }

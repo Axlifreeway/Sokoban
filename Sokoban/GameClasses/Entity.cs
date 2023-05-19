@@ -41,6 +41,6 @@ namespace Sokoban.GameClasses
             }
         }
 
-        public abstract bool IsDead { get; set; }
+        public abstract bool IsDead { get; }
     }
 }

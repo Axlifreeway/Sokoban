@@ -133,6 +133,7 @@
     <Content Include="Models\Classic.png" />
     <Content Include="Models\HP.png" />
     <Content Include="Models\MainHero.png" />
+    <Content Include="Models\WIN.png" />
     <Content Include="Models\PlayerPicture.png" />
     <Content Include="Models\StrongMob.png" />
     <Content Include="Models\Wall.png" />

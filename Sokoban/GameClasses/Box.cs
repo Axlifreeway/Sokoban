@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace Sokoban
     {
         public bool Win { get; set; }
 
-        public override bool IsDead { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override bool IsDead { get => false; }
 
         public Box(int x, int y):base(x, y)
         {

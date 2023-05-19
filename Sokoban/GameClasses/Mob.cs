@@ -21,7 +21,7 @@ namespace Sokoban.GameClasses
                 Model = new Bitmap(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\Boss.png"));
         }
         public MobType Type { get; }
-        public override bool IsDead { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override bool IsDead { get => throw new NotImplementedException();}
 
         public static void Behavior(Map map)
         {

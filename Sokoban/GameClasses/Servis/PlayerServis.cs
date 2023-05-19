@@ -51,5 +51,10 @@ namespace Sokoban.GameClasses.Servis
             }
             map.CheckOnWin();
         }
+
+        public static void damage(Map map)
+        {
+
+        }
     }
 }

@@ -63,7 +63,7 @@ namespace Sokoban
                 Painter.start = new Point(map.Player.X, map.Player.Y);
             }
 
-            if (++TickCount == 10)
+            if (++TickCount == 5)
             {
                 Mob.Behavior(map);
                 TickCount = 0;
