@@ -9,17 +9,16 @@ using System.Threading.Tasks;
 
 namespace Sokoban
 {
-    public class Cell
+    public class Cell:Entity
     {
-        public Cell(int x, int y)
+        public Cell(int x, int y):base(x, y)
         {
             X = x;
             Y = y;
         }
-        public int X { get; set; }
-        public int Y { get; set; }
         public CellType Type { get; set; }
-        
+        public override bool IsDead { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public Image GetModel()
         {
             if (Type == CellType.Win) return new Bitmap(Path.Combine(

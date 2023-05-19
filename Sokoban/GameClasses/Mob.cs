@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Sokoban.GameClasses
 {
-    public class Mob
+    public class Mob:Entity
     {
-        public Mob(int x, int y, MobType type)
+        public Mob(int x, int y, MobType type):base(x, y)
         {
             X = x;
             Y = y;
@@ -22,11 +22,8 @@ namespace Sokoban.GameClasses
             else
                 Model = new Bitmap(Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\Boss.png"));
         }
-
-        public float X { get; set; }
-        public float Y { get; set; }
         public MobType Type { get; }
-        public Image Model { get; }
+        public override bool IsDead { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public static void Behavior(Map map)
         {
@@ -111,7 +108,7 @@ namespace Sokoban.GameClasses
             Move(x, y, map);
         }
 
-        public void Move(float moveX, float moveY, Map map)
+        public void Move(int moveX, int moveY, Map map)
         {
             if (X + moveX >= 0 && X + moveX < map.Width)
                 X += moveX;

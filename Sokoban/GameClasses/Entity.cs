@@ -14,13 +14,14 @@ namespace Sokoban.GameClasses
     {
         public Entity(int x, int y)
         {
-            X = x; Y = y;
+            X = x;
+            Y = y;
         }
-        public Image Model { get; }
-        public PlayerFrames PlayerFrames { get; }
-        public EntitySounds PlayerSounds { get; }
-        public float X { get; set; }
-        public float Y { get; set; }
+        public Image Model { get; protected set; }
+        public PlayerFrames PlayerFrames { get; protected set; }
+        public EntitySounds PlayerSounds { get; protected set; }
+        public int X { get; set; }
+        public int Y { get; set; }
 
         public int DirX { get; set; }
         public int DirY { get; set; }

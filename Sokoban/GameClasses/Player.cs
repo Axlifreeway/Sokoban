@@ -5,9 +5,9 @@ using Sokoban.GameClasses.View;
 
 namespace Sokoban
 {
-    public class Player
+    public class Player:Entity
     {
-        public Player(int x, int y)
+        public Player(int x, int y):base(x, y)
         {
             X = x; Y = y;
             Model = new Bitmap(Path.Combine(new DirectoryInfo(
@@ -20,31 +20,7 @@ namespace Sokoban
                 Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\Sounds\\PlayerSounds\\footsteps.wav"));
             PlayerSounds = new EntitySounds(footStepSound);
         }
-        public Image Model { get; }
-        
-        public PlayerFrames PlayerFrames { get; set; }
 
-        public EntitySounds PlayerSounds { get; }
-
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int DirX { get; set; }
-        public int DirY { get; set; }
-
-        public Direction Direction
-        {
-            get
-            {
-                if (DirX == 0 && DirY == 1)
-                    return Direction.Down;
-                else if (DirX == 0 && DirY == -1)
-                    return Direction.Up;
-                else if (DirX == 1 && DirY == 0)
-                    return Direction.Right;
-                else if (DirX == -1 && DirY == 0)
-                    return Direction.Left;
-                else return Direction.Down;
-            }
-        }
+        public override bool IsDead { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 }
