@@ -28,6 +28,5 @@ namespace Sokoban
         public List<HealthPoints> HP { get; set; }
 
         public override bool IsDead { get => HP.Count > 0; }
-        }
     }
 }
