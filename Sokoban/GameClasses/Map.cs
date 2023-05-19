@@ -51,8 +51,8 @@ namespace Sokoban
             {
                 for (int j = 0; j < map.GetLength(1); j++)
                 {
-                    if (map[i, j] == 3) Player = new Player(i * Levels.Size, j * Levels.Size);
-                    if (map[i, j] == 2) Boxes.Add(new Box(i * Levels.Size, j * Levels.Size));
+                    if (map[i, j] == 2) Player = new Player(i * Levels.Size, j * Levels.Size);
+                    if (map[i, j] == 3) Boxes.Add(new Box(i * Levels.Size, j * Levels.Size));
                     if (map[i, j] == 6) Mob = new Mob(i * Levels.Size, j * Levels.Size, MobType.Strong);
                     Cells[i, j] = new Cell(i * Levels.Size, j * Levels.Size);
                     DynamicMap[i, j] = new Cell(i * Levels.Size, j * Levels.Size);

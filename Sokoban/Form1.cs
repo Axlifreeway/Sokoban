@@ -51,9 +51,9 @@ namespace Sokoban
             {
                 map.Player.PlayerFrames.CurrentFrame += 1;
                 IsKeyPress = !map.Player.PlayerFrames.IsEndAnimate;
-                if (map.Player.PlayerFrames.CurrentFrame == 2)
-                    GameMusic.PlaySound(map.Player.PlayerSounds.FootStepSound);
-                GameMusic.StopMusic();
+                //if (map.Player.PlayerFrames.CurrentFrame == 2)
+                    //GameMusic.PlaySound(map.Player.PlayerSounds.FootStepSound);
+                //GameMusic.StopMusic();
             }
             else
             {
