@@ -12,6 +12,7 @@ namespace Sokoban.GameClasses
         Win,
         Player,
         Box,
-        Wall
+        Wall,
+        Mob
     }
 }

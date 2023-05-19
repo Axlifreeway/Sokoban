@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -15,6 +16,7 @@ namespace Sokoban.GameClasses.View
         public static void Paint(object sender, PaintEventArgs e, Map map)
         {
             Graphics graphics = e.Graphics;
+            var HP = new HealthPoints();
             
             for (int i = 0; i < map.Cells.GetLength(0); i++)
             {
@@ -23,12 +25,17 @@ namespace Sokoban.GameClasses.View
                     graphics.DrawImage(map.Cells[i, j].GetModel(), Levels.Size * i, Levels.Size * j);
                 }
             }
-
+            if(map.Mob != null)
+                graphics.DrawImage(map.Mob.Model, map.Mob.X, map.Mob.Y);
             foreach (var box in map.Boxes)
             {
                 graphics.DrawImage(box.Model, box.X, box.Y);
             }
             AnimatePlayer(map, graphics);
+            for (int i = 0; i < 3; i++)
+            {
+                graphics.DrawImage(HP.Model, 64 * i, 16);
+            }
 
         }
 

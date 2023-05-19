@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameClasses\HealthPoints.cs" />
     <Compile Include="GameClasses\Mob.cs" />
     <Compile Include="GameClasses\MobType.cs" />
     <Compile Include="GameClasses\View\EntitySounds.cs" />
@@ -130,6 +131,7 @@
   <ItemGroup>
     <Content Include="Models\Box.png" />
     <Content Include="Models\Classic.png" />
+    <Content Include="Models\HP.png" />
     <Content Include="Models\MainHero.png" />
     <Content Include="Models\PlayerPicture.png" />
     <Content Include="Models\StrongMob.png" />

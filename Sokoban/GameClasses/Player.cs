@@ -20,6 +20,8 @@ namespace Sokoban
             PlayerSounds = new EntitySounds(footStepSound);
         }
 
+        public static float HP { get; set; }
+
         public override bool IsDead { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 }
