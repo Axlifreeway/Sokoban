@@ -22,11 +22,14 @@ namespace Sokoban
         public List<Cell> Win { get; set; }
         public Size Size { get;}
 
-        public Map(int[,] map)
+        public GameForm Form { get; set; }
+
+        public Map(int[,] map, GameForm form)
         {
             Size = new Size(map.GetLength(0) * Levels.Size, map.GetLength(1) * Levels.Size);
             Boxes = new List<Box>();
             Win = new List<Cell>();
+            Form = form;
             Init(map);
         }
 
@@ -73,7 +76,7 @@ namespace Sokoban
                 if (Levels.currentLevel != Levels.LevelsCount)
                 {
                     MessageBox.Show("Победа");
-                    GameForm.GameInitialisation(++Levels.currentLevel);
+                    Form.GameInitialisation(++Levels.currentLevel);
                 }
                 else
                 {

@@ -13,6 +13,7 @@ using Sokoban.GameClasses;
 using Sokoban.GameClasses.Servis;
 using Sokoban.GameClasses.View;
 using System.Diagnostics.Eventing.Reader;
+using System.Runtime.CompilerServices;
 
 namespace Sokoban
 {
@@ -39,9 +40,11 @@ namespace Sokoban
             GameInitialisation(Levels.currentLevel);
         }
 
-        public static void GameInitialisation(int level)
+        public void GameInitialisation(int level)
         {
-            map = new Map(Levels.GetLevel(level));
+            map = new Map(Levels.GetLevel(level), this);
+            
+            this.Size = map.Size;
 
             Painter.start = new Point(map.Player.X, map.Player.Y);     
 
