@@ -37,7 +37,10 @@ namespace Sokoban.GameClasses.Servis
                     move = PlayerServis.Move(map, player);
                     break;
                 case Keys.R:
-                    GameForm.GameInitialisation(Levels.currentLevel);
+                    map.Form.GameInitialisation(Levels.currentLevel);
+                    break;
+                case Keys.Oem3:
+                    map.Form.GameInitialisation(++Levels.currentLevel);
                     break;
                 default:
                     return false;                   

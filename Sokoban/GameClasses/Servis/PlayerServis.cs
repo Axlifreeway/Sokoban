@@ -13,42 +13,48 @@ namespace Sokoban.GameClasses.Servis
         {
             int moveX = Levels.Size * player.DirX;
             int moveY = Levels.Size * player.DirY;
-            bool IsMove = false;
-            if (player.X + moveX > 0 && player.X + moveX < map.Width
-                && player.Y + moveY > 0 && player.Y + moveY < map.Height
-                && map[player.DirX + player.X / Levels.Size, player.DirY + player.Y / Levels.Size].Type != CellType.Wall)
+            bool isMoved = false;
+            if (player.X + moveX > 0 && player.X + moveX < map.Size.Width
+                && player.Y + moveY > 0 && player.Y + moveY < map.Size.Height
+                && map[moveX + player.X, moveY + player.Y].Type != CellType.Wall)
             {
                 foreach (var box in map.Boxes)
                 {
                     if (player.X + moveX == box.X && player.Y + moveY == box.Y
-                        && (map[player.DirX + box.X / Levels.Size, player.DirY + box.Y / Levels.Size].Type == CellType.Wall
-                        || map[player.DirX + box.X / Levels.Size, player.DirY + box.Y / Levels.Size].Type == CellType.Box))
-                        return false;
+                        && (map[moveX + box.X, moveY + box.Y].Type == CellType.Wall
+                        ||  map[moveX + box.X, moveY + box.Y].Type == CellType.Box))
+                        return isMoved;
                 }
-                map[player.X / Levels.Size, player.Y / Levels.Size].Type = CellType.Classic;
+                map[player.X, player.Y].Type = CellType.Classic;
                 player.X += moveX;
                 player.Y += moveY;
-                map[player.X / Levels.Size, player.Y / Levels.Size].Type = CellType.Player;
-                IsMove = true;
+                map[player.X, player.Y].Type = CellType.Player;
+                isMoved = true;
             }
-            return IsMove;
+            return isMoved;
         }
 
         public static void BoxMove(Map map, Box box)
         {
             int moveX = Levels.Size * map.Player.DirX;
             int moveY = Levels.Size * map.Player.DirY;
-            if (moveX + box.X < map.Width && moveX + box.X > 0
-                && moveY + box.Y < map.Height && moveY + box.Y > 0
-                && map[map.Player.DirX + box.X / Levels.Size, map.Player.DirY + box.Y / Levels.Size].Type != CellType.Wall
-                && map[map.Player.DirX + box.X / Levels.Size, map.Player.DirY + box.Y / Levels.Size].Type != CellType.Box)
+            if (moveX + box.X < map.Size.Width && moveX + box.X > 0
+                && moveY + box.Y < map.Size.Height && moveY + box.Y > 0
+                && map[moveX + box.X, moveY + box.Y].Type != CellType.Wall
+                && map[moveX + box.X, moveY + box.Y].Type != CellType.Box)
             {
-                map[box.X / Levels.Size, box.Y / Levels.Size].Type = CellType.Player;
+                if (map[moveX + box.X, moveY + box.Y].Type == CellType.Win)
+                    box.Win = true;
                 box.X += moveX;
                 box.Y += moveY;
-                map[box.X / Levels.Size, box.Y / Levels.Size].Type = CellType.Box;
+                map[box.X, box.Y].Type = CellType.Box;
             }
             map.CheckOnWin();
+        }
+
+        public static void damage(Map map)
+        {
+
         }
     }
 }

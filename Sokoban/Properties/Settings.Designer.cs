@@ -22,5 +22,17 @@ namespace Sokoban.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int level {
+            get {
+                return ((int)(this["level"]));
+            }
+            set {
+                this["level"] = value;
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -23,9 +24,19 @@ namespace Sokoban.GameClasses.View
                     graphics.DrawImage(map.Cells[i, j].GetModel(), Levels.Size * i, Levels.Size * j);
                 }
             }
-            map.Boxes.ForEach(box => graphics.DrawImage(box.Model, box.X, box.Y));
+
+            if(map.Mob != null)
+                graphics.DrawImage(map.Mob.Model, map.Mob.X, map.Mob.Y);
+
+            foreach (var box in map.Boxes)
+            {
+                graphics.DrawImage(box.Model, box.X, box.Y);
+            }
+
             AnimatePlayer(map, graphics);
-            if (map.Mob != null ) graphics.DrawImage(map.Mob.Model, map.Mob.X, map.Mob.Y);
+
+            for (int i = 0; i < map.Player.HP.Count; i++)
+                graphics.DrawImage(map.Player.HP[i].Model, 64 * i, 16);
         }
 
         public static void AnimatePlayer(Map map, Graphics g)

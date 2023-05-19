@@ -9,24 +9,24 @@ using System.Threading.Tasks;
 
 namespace Sokoban
 {
-    public class Cell
+    public class Cell:Entity
     {
-        public Cell(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
-        public int X { get; set; }
-        public int Y { get; set; }
+        public Cell(int x, int y) : base(x, y) { }
         public CellType Type { get; set; }
-        
+        public override bool IsDead { get => throw new NotImplementedException(); }
+
         public Image GetModel()
         {
-            if (Type == CellType.Win) return new Bitmap(Path.Combine(
+            if (Type == CellType.Win) 
+                return new Bitmap(Path.Combine(
                 new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\WinCell.png"));
-            else if (Type == CellType.Wall) return new Bitmap(Path.Combine(
+
+            else if (Type == CellType.Wall) 
+                return new Bitmap(Path.Combine(
                 new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\Wall.png"));
-            else return new Bitmap(Path.Combine(
+
+            else 
+                return new Bitmap(Path.Combine(
                 new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\Classic.png"));
         }
     }

@@ -1,27 +1,24 @@
-﻿using System;
+﻿using Sokoban.GameClasses;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Sokoban
 {
-    public class Box
+    public class Box:Entity
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public bool Win { get; set; }
 
-        public int X2 { get; set; }
+        public override bool IsDead { get => false; }
 
-        public int Y2 { get; set; }
-
-        public Image Model { get; }
-        public Box(int x, int y)
+        public Box(int x, int y):base(x, y)
         {
-            X = x;
-            Y = y;
             Model = new Bitmap(Path.Combine(
                 new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\Box.png"));
         }

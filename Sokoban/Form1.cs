@@ -13,12 +13,13 @@ using Sokoban.GameClasses;
 using Sokoban.GameClasses.Servis;
 using Sokoban.GameClasses.View;
 using System.Diagnostics.Eventing.Reader;
+using System.Runtime.CompilerServices;
 
 namespace Sokoban
 {
     public partial class GameForm : Form
     {
-        public static Timer timer1 = new Timer();
+        public static Timer timer1;
         public static bool IsKeyPress;
         public static Map map;
         public int TickCount = 0;
@@ -26,6 +27,7 @@ namespace Sokoban
         public GameForm()
         {
             InitializeComponent();
+            timer1 = new Timer();
             this.SetStyle(ControlStyles.UserPaint, true);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
@@ -36,9 +38,11 @@ namespace Sokoban
             GameInitialisation(Levels.currentLevel);
         }
 
-        public static void GameInitialisation(int level)
+        public void GameInitialisation(int level)
         {
-            map = new Map(Levels.GetLevel(level));
+            map = new Map(Levels.GetLevel(level), this);
+            
+            this.Size = map.Size;
 
             Painter.start = new Point(map.Player.X, map.Player.Y);     
 
@@ -60,7 +64,7 @@ namespace Sokoban
                 Painter.start = new Point(map.Player.X, map.Player.Y);
             }
 
-            if (++TickCount == 10)
+            if (++TickCount == 5)
             {
                 Mob.Behavior(map);
                 TickCount = 0;
@@ -77,6 +81,10 @@ namespace Sokoban
         private void OnPaint(object sender, PaintEventArgs e)
         {
             Painter.Paint(sender, e, map);
+        }
+
+        private void GameForm_Leave(object sender, EventArgs e)
+        {
         }
     }
 }
