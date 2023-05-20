@@ -13,16 +13,18 @@ namespace Sokoban
 {
     public partial class MenuForm : Form
     {
+        GameMusic music;
         public MenuForm()
         {
             InitializeComponent();
-            GameMusic.GetMenuMusic();
+            music = new GameMusic();
+            music.PlaySoundLooping(music.PlayerMenuSounds, music.menuMediaList.First());
         }
 
         private void gameStartButton_Click(object sender, EventArgs e)
         {
             var game = new GameForm();
-            GameMusic.StopMusic();
+            music.StopMusic(music.PlayerMenuSounds);
             game.Show();
         }
 

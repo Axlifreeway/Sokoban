@@ -2,71 +2,46 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
-using WMPLib;
 
 namespace Sokoban.GameClasses.View
 {
     public class GameMusic
     {
-        public static WindowsMediaPlayer mediaPlayer = new WindowsMediaPlayer();
-        static List<FileInfo> gameMediaList = new List<FileInfo>();
-        static List<FileInfo> menuMediaList = new List<FileInfo>();
+        public SoundPlayer PlayerGameSounds = new SoundPlayer();
+        public SoundPlayer PlayerMenuSounds = new SoundPlayer();
+        public SoundPlayer PlayerGamePhoneSounds = new SoundPlayer();
 
-        public int Volume
-        {
-            get { return mediaPlayer.settings.volume; }
-            set { mediaPlayer.settings.volume = value; }
-        }
+        public List<FileInfo> gameMediaList = new List<FileInfo>();
+        public List<FileInfo> menuMediaList = new List<FileInfo>();
 
-        static GameMusic()
+        public GameMusic()
         {
             menuMediaList.Add(new FileInfo(
+                Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\menumusicpiano.wav")));
+
+            gameMediaList.Add(new FileInfo(
                 Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\415805__sunsai__menu-background-musicRobin Heijn.wav")));
-            mediaPlayer.settings.volume = 100;
-            //gameMediaList.Add(new FileInfo("3.wav"));
-            //gameMediaList.Add(new FileInfo("4.mp3"));
         }
 
-        public void GetGameMusic()
+        public void PlaySound(FileInfo sound)
         {
-            WMPLib.IWMPPlaylist playlist = mediaPlayer.playlistCollection.newPlaylist("myplaylist");
-            foreach (var music in gameMediaList)
-            {
-                var media = mediaPlayer.newMedia(music.FullName);
-                playlist.appendItem(media);
-            }
-            mediaPlayer.currentPlaylist = playlist;
-            mediaPlayer.settings.setMode("loop", true);
-            mediaPlayer.controls.play();
+            PlayerGameSounds.SoundLocation = sound.FullName;
+            PlayerGameSounds.Play();
         }
 
-        public static void PlaySound(FileInfo sound)
+        public void PlaySoundLooping(SoundPlayer player, FileInfo sound)
         {
-            WMPLib.IWMPPlaylist playlist = mediaPlayer.playlistCollection.newPlaylist("lol");
-            var media = mediaPlayer.newMedia(sound.FullName);
-            playlist.appendItem(media);
-            mediaPlayer.currentPlaylist = playlist;
-            mediaPlayer.controls.play();
+            player.SoundLocation = sound.FullName;
+            player.PlayLooping();
         }
 
-        public static void GetMenuMusic()
+        public void StopMusic(SoundPlayer player) 
         {
-            WMPLib.IWMPPlaylist playlist = mediaPlayer.playlistCollection.newPlaylist("myplaylist");
-            foreach (var music in menuMediaList)
-            {
-                var media = mediaPlayer.newMedia(music.FullName);
-                playlist.appendItem(media);
-            }
-            mediaPlayer.currentPlaylist = playlist;
-            mediaPlayer.settings.setMode("loop", true);
-            mediaPlayer.controls.play();
-        }
-
-        public static void StopMusic() 
-        {
-            mediaPlayer.controls.pause();
+            player.Stop();
+            player.Dispose();
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Sokoban
         public static bool IsKeyPress;
         public static Map map;
         public int TickCount = 0;
+        public GameMusic music;
 
         public GameForm()
         {
@@ -34,7 +35,7 @@ namespace Sokoban
             timer1.Interval = 100;
             timer1.Tick += new EventHandler(Update);
             KeyDown += new KeyEventHandler(OnPress);
-
+            music = new GameMusic();
             GameInitialisation(Levels.currentLevel);
         }
 
@@ -56,8 +57,7 @@ namespace Sokoban
                 map.Player.PlayerFrames.CurrentFrame += 1;
                 IsKeyPress = !map.Player.PlayerFrames.IsEndAnimate;
                 if (map.Player.PlayerFrames.CurrentFrame == 2)
-                    GameMusic.PlaySound(map.Player.PlayerSounds.FootStepSound);
-                GameMusic.StopMusic();
+                    music.PlaySound(map.Player.PlayerSounds.FootStepSound);
             }
             else
             {
