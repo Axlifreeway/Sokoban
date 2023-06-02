@@ -63,14 +63,14 @@ namespace Sokoban
                     if (Cells[i, j].Type == CellType.Win) Win.Add(Cells[i, j]);
                 }
             }
-        }  
-        
+        }
+
         public void CheckOnWin()
         {
             int count = 0;
-            foreach (var box in Boxes) 
-                if(box.Win) count++;
-
+            foreach (var box in Boxes)
+                foreach (var cell in Win)
+                    if (box.X == cell.X && box.Y == cell.Y) count++;
             if (count == Boxes.Count)
             {
                 if (Levels.currentLevel != Levels.LevelsCount)
