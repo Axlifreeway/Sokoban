@@ -81,7 +81,7 @@ namespace Sokoban
                     if (box.X == cell.X && box.Y == cell.Y) count++;
             if (count == Boxes.Count)
             {
-                if (Levels.currentLevel != Levels.LevelsCount)
+                if (Levels.currentLevel <= Levels.LevelsCount)
                 {
                     MessageBox.Show("Победа");
                     Form.GameInitialisation(++Levels.currentLevel);

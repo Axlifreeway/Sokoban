@@ -18,6 +18,7 @@ namespace Sokoban
         public static bool IsWalk = false;
         public static Map map;
         public int TickCount = 0;
+        int TickForMoveMob = 7;
         public GameMusic music;
 
         public GameForm()
