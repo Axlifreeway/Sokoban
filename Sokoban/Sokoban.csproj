@@ -52,6 +52,7 @@
     <Compile Include="GameClasses\HealthPoints.cs" />
     <Compile Include="GameClasses\Mob.cs" />
     <Compile Include="GameClasses\MobType.cs" />
+    <Compile Include="GameClasses\Servis\SearchInWidth.cs" />
     <Compile Include="GameClasses\View\EntitySounds.cs" />
     <Compile Include="GameClasses\View\MusicPlayer.cs" />
     <Compile Include="Menu\AuthorsForm.cs">
