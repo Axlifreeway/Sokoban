@@ -21,12 +21,12 @@ namespace Sokoban
             PlayerSounds = new EntitySounds(footStepSound);
 
             HP = new List<HealthPoints>();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
                 HP.Add(new HealthPoints());
         }
 
         public List<HealthPoints> HP { get; set; }
 
-        public override bool IsDead { get => HP.Count > 0; }
+        public override bool IsDead { get => HP.Count == 0; }
     }
 }
