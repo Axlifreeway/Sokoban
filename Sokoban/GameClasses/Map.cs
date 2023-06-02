@@ -41,6 +41,19 @@ namespace Sokoban
             Init(map);
         }
 
+        public Map(int[,] map)
+        {
+            Size = new Size(map.GetLength(0) * Levels.Size, map.GetLength(1) * Levels.Size);
+            Boxes = new List<Box>();
+            Win = new List<Cell>();
+            BackGround = new Bitmap(
+                    Path.Combine(
+                        new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
+                        "Models\\background.png"));
+            Init(map);
+        }
+
+
         public Cell this[int x, int y]
         {
             get

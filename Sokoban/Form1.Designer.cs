@@ -37,7 +37,9 @@
             this.ClientSize = new System.Drawing.Size(896, 889);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
             this.Name = "GameForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sokoban";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
             this.Leave += new System.EventHandler(this.GameForm_Leave);

@@ -11,9 +11,9 @@ namespace Sokoban.GameClasses.View
 {
     public class Painter
     {
-        public static Point start;        
-        public static Point startM;
-        public static void Paint(object sender, PaintEventArgs e, Map map)
+        public Point start;        
+        public Point startM;
+        public void Paint(object sender, PaintEventArgs e, Map map)
         {
             Graphics graphics = e.Graphics;
             graphics.DrawImage(map.BackGround, 0, 0);
@@ -40,7 +40,7 @@ namespace Sokoban.GameClasses.View
                 graphics.DrawImage(map.Player.HP[i].Model, 50 * i, 10);
         }
 
-        public static void AnimatePlayer(Map map, Graphics g)
+        public void AnimatePlayer(Map map, Graphics g)
         {
             var p = map.Player;
             var idCurrentFrame = p.PlayerFrames.CurrentFrame;
@@ -49,7 +49,7 @@ namespace Sokoban.GameClasses.View
             g.DrawImage(p.PlayerFrames[p.Direction, idCurrentFrame], start);         
         }
 
-        public static void AnimateMob(Map map, Graphics g)
+        public void AnimateMob(Map map, Graphics g)
         {
             var m = map.Mob;
             var idCurrentFrame = m.PlayerFrames.CurrentFrame;

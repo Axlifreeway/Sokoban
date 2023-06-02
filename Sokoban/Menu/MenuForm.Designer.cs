@@ -52,7 +52,7 @@
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(93, 28);
             this.settingsButton.TabIndex = 1;
-            this.settingsButton.Text = "НАСТРОЙКИ";
+            this.settingsButton.Text = "Настройки";
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
@@ -79,6 +79,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F);
             this.label1.Location = new System.Drawing.Point(218, 45);
             this.label1.Name = "label1";
@@ -89,11 +90,12 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(350, 427);
+            this.label2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label2.Location = new System.Drawing.Point(346, 427);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 13);
+            this.label2.Size = new System.Drawing.Size(86, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Kladmens 2023";
+            this.label2.Text = "Beer Team 2023";
             // 
             // MenuForm
             // 
@@ -106,7 +108,9 @@
             this.Controls.Add(this.authorsButton);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.gameStartButton);
+            this.MaximizeBox = false;
             this.Name = "MenuForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sokoban";
             this.ResumeLayout(false);
             this.PerformLayout();

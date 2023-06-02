@@ -13,13 +13,14 @@ namespace Sokoban
 {
     public partial class GameForm : Form
     {
-        public static Timer timer1;
-        public static bool IsKeyPress;
-        public static bool IsWalk = false;
-        public static Map map;
+        public Timer timer1;
+        public bool IsKeyPress;
+        public bool IsWalk = false;
+        public Map map;
         public int TickCount = 0;
-        int TickForMoveMob = 7;
+        int TickForMoveMob = 10;
         public GameMusic music;
+        public Painter painter = new Painter();
 
         public GameForm()
         {
@@ -32,6 +33,7 @@ namespace Sokoban
             timer1.Tick += new EventHandler(Update);
             KeyDown += new KeyEventHandler(OnPress);
             music = new GameMusic();
+            
             GameInitialisation(Levels.currentLevel);
         }
 
@@ -41,10 +43,10 @@ namespace Sokoban
             
             this.Size = map.Size;
 
-            Painter.start = new Point(map.Player.X, map.Player.Y);
+            painter.start = new Point(map.Player.X, map.Player.Y);
             if (map.Mob != null)
             {
-                Painter.startM = new Point(map.Mob.X, map.Mob.Y);
+                painter.startM = new Point(map.Mob.X, map.Mob.Y);
             }
             timer1.Start();
         }
@@ -66,10 +68,10 @@ namespace Sokoban
             }
             else
             {
-                Painter.start = new Point(map.Player.X, map.Player.Y); 
+                painter.start = new Point(map.Player.X, map.Player.Y); 
             }
             TickCount += 1;
-            if(TickCount == 10 && !IsWalk)
+            if(TickCount == TickForMoveMob && !IsWalk)
             {
                 IsWalk = Mob.Behavior(map);
                 TickCount = 0;
@@ -77,15 +79,16 @@ namespace Sokoban
 
             if (IsWalk)
             {
-                map.Mob.PlayerFrames.CurrentFrame += 1;
-                IsWalk = !map.Mob.PlayerFrames.IsEndAnimate;
+                if (map.Mob != null)
+                {
+                    map.Mob.PlayerFrames.CurrentFrame += 1;
+                    IsWalk = !map.Mob.PlayerFrames.IsEndAnimate;
+                }      
             }
             else
             {
                 if (map.Mob != null)
-                {
-                    Painter.startM = new Point(map.Mob.X, map.Mob.Y);
-                }
+                    painter.startM = new Point(map.Mob.X, map.Mob.Y);
             }
             Invalidate();            
         }
@@ -98,7 +101,7 @@ namespace Sokoban
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
-            Painter.Paint(sender, e, map);
+            painter.Paint(sender, e, map);
         }
 
         private void GameForm_Leave(object sender, EventArgs e)
