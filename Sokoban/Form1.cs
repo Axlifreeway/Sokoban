@@ -23,6 +23,7 @@ namespace Sokoban
         public static bool IsKeyPress;
         public static Map map;
         public int TickCount = 0;
+        int TickForMoveMob = 7;
         public GameMusic music;
 
         public GameForm()
@@ -70,7 +71,7 @@ namespace Sokoban
                 Painter.start = new Point(map.Player.X, map.Player.Y);
             }
 
-            if (++TickCount == 5)
+            if (++TickCount == TickForMoveMob)
             {
                 Mob.Behavior(map);
                 TickCount = 0;
