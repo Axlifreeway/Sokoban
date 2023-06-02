@@ -60,12 +60,15 @@ namespace Sokoban
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void authorsButton_Click(object sender, EventArgs e)
         {
-
+            var game = new AuthorsForm();
+            timer.Stop();
+            game.ShowDialog();
+            timer.Start();
         }
 
         private void exitButton_Click(object sender, EventArgs e)
