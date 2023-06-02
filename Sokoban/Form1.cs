@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
-using System.IO;
 using Sokoban.GameClasses;
 using Sokoban.GameClasses.Servis;
 using Sokoban.GameClasses.View;
-using System.Diagnostics.Eventing.Reader;
-using System.Runtime.CompilerServices;
-
 namespace Sokoban
 {
     public partial class GameForm : Form
     {
         public static Timer timer1;
         public static bool IsKeyPress;
+        public static bool IsWalk = false;
         public static Map map;
         public int TickCount = 0;
         public GameMusic music;
@@ -70,18 +65,26 @@ namespace Sokoban
             }
             else
             {
-                Painter.start = new Point(map.Player.X, map.Player.Y);
+                Painter.start = new Point(map.Player.X, map.Player.Y); 
+            }
+            TickCount += 1;
+            if(TickCount == 10 && !IsWalk)
+            {
+                IsWalk = Mob.Behavior(map);
+                TickCount = 0;
+            }
+
+            if (IsWalk)
+            {
+                map.Mob.PlayerFrames.CurrentFrame += 1;
+                IsWalk = !map.Mob.PlayerFrames.IsEndAnimate;
+            }
+            else
+            {
                 if (map.Mob != null)
                 {
                     Painter.startM = new Point(map.Mob.X, map.Mob.Y);
                 }
-            }
-
-            if (++TickCount == 5)
-            {
-                Mob.Behavior(map);
-                map.Mob.PlayerFrames.CurrentFrame += 1;
-                TickCount = 0;
             }
             Invalidate();            
         }

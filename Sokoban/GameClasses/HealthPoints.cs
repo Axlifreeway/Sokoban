@@ -19,6 +19,6 @@ namespace Sokoban.GameClasses
         }
         public Image Model { get; }
 
-        public Image HealthBack { get; set; }
+        public static Image HealthBack { get; set; }
     }
 }

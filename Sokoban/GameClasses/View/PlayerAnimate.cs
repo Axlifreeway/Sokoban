@@ -42,7 +42,7 @@ namespace Sokoban.GameClasses.View
         public PlayerFrames(Bitmap sourse, int dx, int dy, int countFrames)
         {
             var resulution = new Rectangle(new Point(0, 0), new Size(Levels.Size, Levels.Size));
-            var frames = Painter.GetFrames(sourse, resulution, countFrames, dx, dy);
+            var frames = GetFrames(sourse, resulution, countFrames, dx, dy);
             this[Direction.Down] = frames[0];
             this[Direction.Up] = frames[1];
             this[Direction.Left] = frames[2];
@@ -111,6 +111,31 @@ namespace Sokoban.GameClasses.View
                         throw new NotImplementedException();
                 }
             }
+        }
+
+
+
+        public  List<Bitmap[]> GetFrames(Bitmap bmp, Rectangle selection, int countFrames, int dx, int dy)
+        {
+            var frames = new Bitmap[countFrames];
+            var listFrames = new List<Bitmap[]>();
+            if (bmp == null)
+                throw new ArgumentException("No valid bitmap");
+
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < countFrames; j++)
+                {
+                    var leftPoint = new Point(selection.X + (selection.Width + dx) * j, dy * i);
+                    var newSelection = new Rectangle(leftPoint, selection.Size);
+                    Bitmap frame = bmp.Clone(newSelection, bmp.PixelFormat);
+                    frames[j] = frame;
+                }
+                listFrames.Add(frames.ToArray());
+            }
+            bmp.Dispose();
+            return listFrames;
+
         }
     }
 }

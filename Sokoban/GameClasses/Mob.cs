@@ -1,12 +1,9 @@
 ﻿using Sokoban.GameClasses.Servis;
+using Sokoban.GameClasses.View;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Sokoban.GameClasses
 {
@@ -42,26 +39,27 @@ namespace Sokoban.GameClasses
             }
             var source = new Bitmap(Path.Combine(new DirectoryInfo(
                 Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\205efad5a534bd9.png"));
-            PlayerFrames = new PlayerFrames(source, 38, 16, 4);
+            PlayerFrames = new PlayerFrames(source, 38, 130, 4);
         }
         private readonly MobType Type;
         public Queue<Direction> PathToPlayer;
         public readonly int RadiusSearch;
         public override bool IsDead { get => throw new NotImplementedException(); }
 
-        public static void Behavior(Map map)
+        public static bool Behavior(Map map)
         {
             var mob = map.Mob;
-            if (mob == null) return;
-            if (mob.PlayerFound(map))
+            bool move = false;
+            if (mob == null) return false;
+            if (mob.IsPlayerFound(map))
             {
                 mob.GetPathToPlayer(map);
-                Controller.MobMoveToPlayer(map);
+                move = Controller.MobMoveToPlayer(map);
             }
-            //else mob.RandomMove(map);
+            return move;
         }
 
-        public bool PlayerFound(Map map)
+        public bool IsPlayerFound(Map map)
         {
             for (int i = -RadiusSearch; i <= RadiusSearch; i++)
                 for (int j = -RadiusSearch; j <= RadiusSearch; j++)
