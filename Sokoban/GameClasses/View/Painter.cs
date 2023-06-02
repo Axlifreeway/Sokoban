@@ -52,7 +52,9 @@ namespace Sokoban.GameClasses.View
         public static void AnimateMob(Map map, Graphics g)
         {
             var m = map.Mob;
-            var idCurrentFrame = m.PlayerFrames.CurrentFrame;
+            if (m == null)
+                return;
+             var idCurrentFrame = m.PlayerFrames.CurrentFrame;
             start.X += 21 * idCurrentFrame * map.Mob.DirX;
             start.Y += 21 * idCurrentFrame * map.Mob.DirY;
             g.DrawImage(m.PlayerFrames[m.Direction, idCurrentFrame], startM);

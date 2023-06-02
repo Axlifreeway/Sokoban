@@ -81,7 +81,8 @@ namespace Sokoban
             if (++TickCount == TickForMoveMob)
             {
                 Mob.Behavior(map);
-                map.Mob.PlayerFrames.CurrentFrame += 1;
+                if (map.Mob != null)
+                    map.Mob.PlayerFrames.CurrentFrame += 1;
                 TickCount = 0;
             }
             Invalidate();            

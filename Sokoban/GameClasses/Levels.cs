@@ -112,7 +112,7 @@ namespace Sokoban
                 case 6: return level_6;
                 case 7: return level_7;
                 default:
-                    return null;
+                    return level_7;
             }
         }
     }
