@@ -129,6 +129,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Models\205efad5a534bd9.png" />
     <Content Include="Models\background.png" />
     <Content Include="Models\background2.png" />
     <Content Include="Models\bc.png" />

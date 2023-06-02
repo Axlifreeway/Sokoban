@@ -12,7 +12,7 @@ namespace Sokoban.GameClasses.View
     public class Painter
     {
         public static Point start;        
-
+        public static Point startM;
         public static void Paint(object sender, PaintEventArgs e, Map map)
         {
             Graphics graphics = e.Graphics;
@@ -34,6 +34,7 @@ namespace Sokoban.GameClasses.View
             }
 
             AnimatePlayer(map, graphics);
+            AnimateMob(map, graphics);
             graphics.DrawImage(map.Player.HP[0].HealthBack, 0, 8);
             for (int i = 0; i < map.Player.HP.Count; i++)
                 graphics.DrawImage(map.Player.HP[i].Model, 50 * i, 10);
@@ -47,6 +48,16 @@ namespace Sokoban.GameClasses.View
             start.Y += 21 * idCurrentFrame * map.Player.DirY;
             g.DrawImage(p.PlayerFrames[p.Direction, idCurrentFrame], start);         
         }
+
+        public static void AnimateMob(Map map, Graphics g)
+        {
+            var m = map.Mob;
+            var idCurrentFrame = m.PlayerFrames.CurrentFrame;
+            start.X += 21 * idCurrentFrame * map.Mob.DirX;
+            start.Y += 21 * idCurrentFrame * map.Mob.DirY;
+            g.DrawImage(m.PlayerFrames[m.Direction, idCurrentFrame], startM);
+        }
+
 
         public static List<Bitmap[]> GetFrames(Bitmap bmp, Rectangle selection, int countFrames, int dx, int dy)
         {
