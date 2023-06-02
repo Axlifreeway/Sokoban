@@ -129,9 +129,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Models\background.png" />
+    <Content Include="Models\background2.png" />
+    <Content Include="Models\bc.png" />
+    <Content Include="Models\block_06.png" />
     <Content Include="Models\Box.png" />
     <Content Include="Models\Classic.png" />
-    <Content Include="Models\HP.png" />
+    <Content Include="Models\crate_12.png" />
+    <Content Include="Models\environment_07.png" />
+    <Content Include="Models\ground_04.png" />
+    <Content Include="Models\heartshealth.png" />
     <Content Include="Models\MainHero.png" />
     <Content Include="Models\WIN.png" />
     <Content Include="Models\PlayerPicture.png" />

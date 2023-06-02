@@ -3,6 +3,7 @@ using Sokoban.GameClasses.Servis;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -22,6 +23,9 @@ namespace Sokoban
         public List<Cell> Win { get; set; }
         public Size Size { get;}
 
+        public Image BackGround { get; set; }
+        
+
         public GameForm Form { get; set; }
 
         public Map(int[,] map, GameForm form)
@@ -30,6 +34,10 @@ namespace Sokoban
             Boxes = new List<Box>();
             Win = new List<Cell>();
             Form = form;
+            BackGround = new Bitmap(
+                    Path.Combine(
+                        new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
+                        "Models\\background.png"));
             Init(map);
         }
 

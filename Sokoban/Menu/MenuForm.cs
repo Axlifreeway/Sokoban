@@ -25,7 +25,7 @@ namespace Sokoban
         {
             var game = new GameForm();
             music.StopMusic(music.PlayerMenuSounds);
-            game.Show();
+            game.ShowDialog();
         }
 
         private void settingsButton_Click(object sender, EventArgs e)

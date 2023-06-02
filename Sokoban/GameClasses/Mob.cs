@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sokoban.GameClasses.View;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -38,6 +39,9 @@ namespace Sokoban.GameClasses
                         new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
                         "Models\\Boss.png"));
             }
+            var source = new Bitmap(Path.Combine(new DirectoryInfo(
+                Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\205efad5a534bd9.png"));
+            PlayerFrames = new PlayerFrames(source, 38, 16, 4);
         }
         private readonly MobType Type;
         private readonly int RadiusSearch;

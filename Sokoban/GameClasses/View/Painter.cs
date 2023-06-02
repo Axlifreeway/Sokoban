@@ -16,7 +16,7 @@ namespace Sokoban.GameClasses.View
         public static void Paint(object sender, PaintEventArgs e, Map map)
         {
             Graphics graphics = e.Graphics;
-            
+            graphics.DrawImage(map.BackGround, 0, 0);
             for (int i = 0; i < map.Cells.GetLength(0); i++)
             {
                 for (int j = 0; j < map.Cells.GetLength(1); j++)
@@ -34,9 +34,9 @@ namespace Sokoban.GameClasses.View
             }
 
             AnimatePlayer(map, graphics);
-
+            graphics.DrawImage(map.Player.HP[0].HealthBack, 0, 8);
             for (int i = 0; i < map.Player.HP.Count; i++)
-                graphics.DrawImage(map.Player.HP[i].Model, 64 * i, 16);
+                graphics.DrawImage(map.Player.HP[i].Model, 50 * i, 10);
         }
 
         public static void AnimatePlayer(Map map, Graphics g)

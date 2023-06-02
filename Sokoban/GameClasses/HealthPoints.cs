@@ -12,8 +12,13 @@ namespace Sokoban.GameClasses
     {
         public HealthPoints() {
             Model = new Bitmap(Path.Combine(
-                new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\HP.png"));
+                new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\heartshealth.png"));
+
+            HealthBack = new Bitmap(Path.Combine(
+                new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\bc.png"));
         }
         public Image Model { get; }
+
+        public Image HealthBack { get; set; }
     }
 }
