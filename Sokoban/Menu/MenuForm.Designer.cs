@@ -62,7 +62,7 @@
             this.authorsButton.Name = "authorsButton";
             this.authorsButton.Size = new System.Drawing.Size(93, 28);
             this.authorsButton.TabIndex = 2;
-            this.authorsButton.Text = "Авторы";
+            this.authorsButton.Text = "АВТОРЫ";
             this.authorsButton.UseVisualStyleBackColor = true;
             this.authorsButton.Click += new System.EventHandler(this.authorsButton_Click);
             // 
