@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Sokoban.GameClasses
 {
@@ -96,6 +97,19 @@ namespace Sokoban.GameClasses
             }
 
             PathToPlayer = directions;
+        }
+
+        public static void Damage(Map map)
+        {
+            map.Player.HP.RemoveAt(0);
+        }
+
+        public static bool PointInRangeSearch(Map map, int x, int y)
+        {
+            return x <= map.Mob.RadiusSearch * Levels.Size + map.Mob.X
+                       && x >= -map.Mob.RadiusSearch * Levels.Size - map.Mob.X
+                       && y <= map.Mob.RadiusSearch * Levels.Size + map.Mob.Y
+                       && y >= -map.Mob.RadiusSearch * Levels.Size - map.Mob.Y;
         }
     }
 }

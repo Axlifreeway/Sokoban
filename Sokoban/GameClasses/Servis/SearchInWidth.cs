@@ -23,7 +23,7 @@ namespace Sokoban.GameClasses.Servis
                 var x = partOfPath.Last.Value.X;
                 var y = partOfPath.Last.Value.Y;
                 if (!PointInRangeMap(map, x, y)) continue;
-                if (!PointInRangeMobSearch(map, x, y)) continue;
+                if (!Mob.PointInRangeSearch(map, x, y)) continue;
                 if (PointIsBoxOrWall(map, x, y)) continue;
                 if (visited.Contains(map[x, y])) continue;
 
@@ -53,14 +53,6 @@ namespace Sokoban.GameClasses.Servis
         static bool PointInRangeMap(Map map, int x, int y)
         {
             return x >= 0 && x < map.Size.Width && y >= 0 && y < map.Size.Height;
-        }
-
-        static bool PointInRangeMobSearch(Map map, int x, int y)
-        {
-            return x <= map.Mob.RadiusSearch * Levels.Size + map.Mob.X
-                       && x >= -map.Mob.RadiusSearch * Levels.Size - map.Mob.X
-                       && y <= map.Mob.RadiusSearch * Levels.Size + map.Mob.Y
-                       && y >= -map.Mob.RadiusSearch * Levels.Size - map.Mob.Y;
         }
 
         static bool PointIsBoxOrWall(Map map, int x, int y)

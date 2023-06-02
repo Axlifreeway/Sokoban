@@ -32,7 +32,7 @@ namespace Sokoban.GameClasses.Servis
                 map[player.X, player.Y].Type = CellType.Player;
                 isMoved = true;
             }
-            damage(map);
+
             return isMoved;
         }
 
@@ -50,20 +50,6 @@ namespace Sokoban.GameClasses.Servis
                 map[box.X, box.Y].Type = CellType.Box;
             }
             map.CheckOnWin();
-        }
-
-        public static void damage(Map map)
-        {
-            if (map.Player.X == map.Mob.X && map.Player.Y == map.Mob.Y)
-            {
-                map.Player.HP.RemoveAt(0);
-            }
-
-            if (map.Player.IsDead)
-            {
-                MessageBox.Show("Вы умерли");
-                map.Form.GameInitialisation(Levels.currentLevel);
-            }
         }
     }
 }

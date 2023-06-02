@@ -87,6 +87,9 @@ namespace Sokoban.GameClasses.Servis
                 map.Mob.X += moveX;
             if (map.Mob.Y + moveY >= 0 && map.Mob.Y + moveY < map.Size.Height)
                 map.Mob.Y += moveY;
+
+            if (map.Player.X == map.Mob.X && map.Player.Y == map.Mob.Y)
+                Mob.Damage(map);
         }
     }
 }

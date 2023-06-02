@@ -52,6 +52,12 @@ namespace Sokoban
 
         public void Update(object sender, EventArgs e)
         {
+            if (map.Player.IsDead)
+            {
+                map.Form.GameInitialisation(Levels.currentLevel);
+                MessageBox.Show("Вы умерли");
+            }
+
             if (IsKeyPress)
             {
                 map.Player.PlayerFrames.CurrentFrame += 1;
