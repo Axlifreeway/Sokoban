@@ -46,8 +46,11 @@ namespace Sokoban
             
             this.Size = map.Size;
 
-            Painter.start = new Point(map.Player.X, map.Player.Y);     
-
+            Painter.start = new Point(map.Player.X, map.Player.Y);
+            if (map.Mob != null)
+            {
+                Painter.startM = new Point(map.Mob.X, map.Mob.Y);
+            }
             timer1.Start();
         }
 
@@ -69,11 +72,16 @@ namespace Sokoban
             else
             {
                 Painter.start = new Point(map.Player.X, map.Player.Y);
+                if (map.Mob != null)
+                {
+                    Painter.startM = new Point(map.Mob.X, map.Mob.Y);
+                }
             }
 
             if (++TickCount == TickForMoveMob)
             {
                 Mob.Behavior(map);
+                map.Mob.PlayerFrames.CurrentFrame += 1;
                 TickCount = 0;
             }
             Invalidate();            

@@ -20,7 +20,7 @@ namespace Sokoban
         public Box(int x, int y):base(x, y)
         {
             Model = new Bitmap(Path.Combine(
-                new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\Box.png"));
+                new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\crate_12.png"));
         }
     }
 }

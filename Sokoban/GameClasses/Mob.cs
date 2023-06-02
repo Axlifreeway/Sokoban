@@ -40,6 +40,9 @@ namespace Sokoban.GameClasses
                         new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
                         "Models\\Boss.png"));
             }
+            var source = new Bitmap(Path.Combine(new DirectoryInfo(
+                Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\205efad5a534bd9.png"));
+            PlayerFrames = new PlayerFrames(source, 38, 16, 4);
         }
         private readonly MobType Type;
         public Queue<Direction> PathToPlayer;
