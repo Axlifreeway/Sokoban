@@ -52,5 +52,44 @@ namespace Sokoban.GameClasses.Servis
             }
             return move;
         }
+
+        public static void MobMoveToPlayer(Map map)
+        {
+            var path = map.Mob.PathToPlayer;
+            if (path.Count == 0) return;
+
+            var dir = path.Dequeue();
+            int moveY;
+            int moveX;
+            switch (dir)
+            {
+                case Direction.Up:
+                    moveY = -Levels.Size;
+                    moveX = 0;
+                    break;
+                case Direction.Down:
+                    moveY = Levels.Size;
+                    moveX = 0;
+                    break;
+                case Direction.Left:
+                    moveY = 0;
+                    moveX = -Levels.Size;
+                    break;
+                case Direction.Right:
+                    moveY = 0;
+                    moveX = Levels.Size;
+                    break;
+                default:
+                    return;
+            }
+
+            if (map.Mob.X + map.Mob.X >= 0 && map.Mob.X + moveX < map.Size.Width)
+                map.Mob.X += moveX;
+            if (map.Mob.Y + moveY >= 0 && map.Mob.Y + moveY < map.Size.Height)
+                map.Mob.Y += moveY;
+
+            if (map.Player.X == map.Mob.X && map.Player.Y == map.Mob.Y)
+                Mob.Damage(map);
+        }
     }
 }
