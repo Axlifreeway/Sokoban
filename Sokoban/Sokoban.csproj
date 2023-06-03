@@ -36,6 +36,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.DirectX.AudioVideoPlayback, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Desktop\Microsoft.DirectX.AudioVideoPlayback.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -154,6 +158,9 @@
     <Content Include="Music\menumusicpiano.wav" />
     <Content Include="Music\Sounds\PlayerSounds\death.wav" />
     <Content Include="Music\Sounds\PlayerSounds\footsteps.wav" />
+    <Content Include="Music\Sounds\PlayerSounds\footsteps2.wav" />
+    <Content Include="Music\Sounds\PlayerSounds\getDamage.mp3" />
+    <Content Include="Music\саундтрек.wav" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="stdole">

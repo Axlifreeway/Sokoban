@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.DirectX.AudioVideoPlayback;
 using Sokoban.GameClasses;
 using Sokoban.GameClasses.Servis;
 using Sokoban.GameClasses.View;
@@ -21,7 +22,6 @@ namespace Sokoban
         int TickForMoveMob = 10;
         public GameMusic music;
         public Painter painter = new Painter();
-
         public GameForm()
         {
             InitializeComponent();
@@ -32,9 +32,12 @@ namespace Sokoban
             timer1.Interval = 100;
             timer1.Tick += new EventHandler(Update);
             KeyDown += new KeyEventHandler(OnPress);
-            music = new GameMusic();
-            
             GameInitialisation(Levels.currentLevel);
+            music = new GameMusic(map);
+            music.MusicVolume = 85;
+            music.SoundsVolume = 90;
+            music.currentPlaylist = music.game;
+            music.PlayPlaylist();
         }
 
         public void GameInitialisation(int level)
@@ -56,6 +59,7 @@ namespace Sokoban
             if (map.Player.IsDead)
             {
                 map.Form.GameInitialisation(Levels.currentLevel);
+                music.PlaySound(music.playerStep, map.Player.PlayerSounds.DeadSound.FullName, 100);
                 MessageBox.Show("Вы умерли");
             }
 
@@ -64,7 +68,9 @@ namespace Sokoban
                 map.Player.PlayerFrames.CurrentFrame += 1;
                 IsKeyPress = !map.Player.PlayerFrames.IsEndAnimate;
                 if (map.Player.PlayerFrames.CurrentFrame == 2)
-                    music.PlaySound(map.Player.PlayerSounds.FootStepSound);
+                {
+                    music.PlaySound(music.playerStep, map.Player.PlayerSounds.FootStepSound.FullName);
+                }
             }
             else
             {
@@ -83,6 +89,10 @@ namespace Sokoban
                 {
                     map.Mob.PlayerFrames.CurrentFrame += 1;
                     IsWalk = !map.Mob.PlayerFrames.IsEndAnimate;
+                    if (map.Mob.PlayerFrames.CurrentFrame == 2)
+                    {
+                        music.PlaySound(music.playerStep, map.Player.PlayerSounds.FootStepSound.FullName);
+                    }
                 }      
             }
             else
@@ -96,7 +106,7 @@ namespace Sokoban
         private void OnPress(object sender, KeyEventArgs e)
         {
             if (!IsKeyPress)
-                IsKeyPress = Controller.PlayerMove(e, map);                  
+                IsKeyPress = Controller.PlayerMove(e, map);
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
@@ -106,6 +116,12 @@ namespace Sokoban
 
         private void GameForm_Leave(object sender, EventArgs e)
         {
+            
+        }
+
+        private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            music.StopMusic();
         }
     }
 }

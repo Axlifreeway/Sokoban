@@ -1,16 +1,11 @@
-﻿using Sokoban.GameClasses.Servis;
-using Sokoban.GameClasses;
+﻿using Sokoban.GameClasses;
 using Sokoban.GameClasses.View;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.AxHost;
 
 namespace Sokoban
 {
@@ -40,22 +35,24 @@ namespace Sokoban
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             music = new GameMusic();
-            music.PlaySoundLooping(music.PlayerMenuSounds, music.menuMediaList.First());
             Paint += OnPaint;
             timer.Interval = 200;
             timer.Tick += Update; 
             timer.Start();
             map = new Map(menu);
+            music.MusicVolume = 100;
+            music.currentPlaylist = music.menu;
+            music.PlayPlaylist();
         }
 
         private void gameStartButton_Click(object sender, EventArgs e)
         {
             var game = new GameForm();
-            music.StopMusic(music.PlayerMenuSounds);
+            music.StopMusic();
             timer.Stop();
             game.ShowDialog();
             timer.Start();
-            music.PlaySoundLooping(music.PlayerMenuSounds, music.menuMediaList.First());
+            music.PlayPlaylist();
         }
 
         private void settingsButton_Click(object sender, EventArgs e)

@@ -9,20 +9,21 @@ namespace Sokoban.GameClasses.View
 {
     public class EntitySounds
     {
-        public EntitySounds(FileInfo fs)
+        public EntitySounds(FileInfo fs, FileInfo ds, FileInfo gd)
         {
-            //DeadSound = ds;
-            FootStepSound = new FileInfo(fs.FullName);
+            DeadSound = ds;
+            FootStepSound = fs;
+            GetDamage = gd;
         }
-
+        private FileInfo deadSound;
         public FileInfo DeadSound 
         {
-            get { return DeadSound; }
+            get { return deadSound; }
             private set
             {
                 if (value== null)
                     throw new ArgumentNullException("value");
-                DeadSound = value;
+                deadSound = value;
             }
         }
         private FileInfo footStepSound;
@@ -34,6 +35,18 @@ namespace Sokoban.GameClasses.View
                 if (value == null)
                     throw new ArgumentNullException("value");
                 footStepSound = value;
+            }
+        }
+
+        private FileInfo getDamage;
+        public FileInfo GetDamage
+        {
+            get { return getDamage; }
+            private set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                getDamage = value;
             }
         }
     }

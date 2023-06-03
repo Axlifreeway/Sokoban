@@ -41,6 +41,7 @@
             this.Name = "GameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sokoban";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.GameForm_FormClosed);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OnPaint);
             this.Leave += new System.EventHandler(this.GameForm_Leave);
             this.ResumeLayout(false);

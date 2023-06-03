@@ -17,9 +17,16 @@ namespace Sokoban
             PlayerFrames = new PlayerFrames(source, 1, 168, 4);
 
             var footStepSound = new FileInfo(Path.Combine(new DirectoryInfo(
-                Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\Sounds\\PlayerSounds\\footsteps.wav"));
-            PlayerSounds = new EntitySounds(footStepSound);
+                Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\Sounds\\PlayerSounds\\footsteps2.wav"));
 
+            var deadSound = new FileInfo(Path.Combine(new DirectoryInfo(
+                Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\Sounds\\PlayerSounds\\death.wav"));
+
+            var gd = new FileInfo(Path.Combine(new DirectoryInfo(
+                Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\Sounds\\PlayerSounds\\getDamage.mp3"));
+
+            PlayerSounds = new EntitySounds(footStepSound, deadSound, gd);
+            
             HP = new List<HealthPoints>();
             for (int i = 0; i < 5; i++)
                 HP.Add(new HealthPoints());
