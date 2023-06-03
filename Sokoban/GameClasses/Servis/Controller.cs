@@ -13,6 +13,7 @@ namespace Sokoban.GameClasses.Servis
         public static bool PlayerMove(KeyEventArgs e, Map map)
         {
             Player player = map.Player;
+            Mob mob = map.Mob;
             bool move = false;
             switch (e.KeyCode)
             {
@@ -50,10 +51,18 @@ namespace Sokoban.GameClasses.Servis
                 if (map.Player.X == box.X && map.Player.Y == box.Y)
                     PlayerServis.BoxMove(map, box);
             }
-
+            
             if (map.Mob != null)
-                if (map.Player.X == map.Mob.X && map.Player.Y == map.Mob.Y)
+            {
+                if (map[mob.X, mob.Y].Type == CellType.Box)
+                {
+                    player.KillMob(map);
+                    return move;
+                }
+
+                if (map.Player.X == mob.X && map.Player.Y == mob.Y)
                     Mob.Damage(map);
+            }
             return move;
         }
 

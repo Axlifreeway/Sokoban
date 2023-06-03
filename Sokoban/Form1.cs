@@ -33,9 +33,11 @@ namespace Sokoban
             timer1.Tick += new EventHandler(Update);
             KeyDown += new KeyEventHandler(OnPress);
             GameInitialisation(Levels.currentLevel);
-            music = new GameMusic(map);
-            music.MusicVolume = set.MusicVolume;
-            music.SoundsVolume = set.SoundsVolume;
+            music = new GameMusic(map)
+            {
+                MusicVolume = set.MusicVolume,
+                SoundsVolume = set.SoundsVolume
+            };
             music.currentPlaylist = music.game;
             music.PlayPlaylist();
         }

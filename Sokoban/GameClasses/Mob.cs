@@ -52,11 +52,7 @@ namespace Sokoban.GameClasses
             bool move = false;
 
             if (mob == null) return move;
-            if (map[mob.X, mob.Y].Type == CellType.Box)
-            {
-                map.Mob = null;
-                return move;
-            }
+            
 
             if (mob.IsPlayerFound(map))
             {

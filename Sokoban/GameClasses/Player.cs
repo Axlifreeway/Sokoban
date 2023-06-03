@@ -35,5 +35,10 @@ namespace Sokoban
         public List<HealthPoints> HP { get; set; }
 
         public override bool IsDead { get => HP.Count == 0; }
+
+        public void KillMob(Map map)
+        {
+            map.Mob = null;
+        }
     }
 }
