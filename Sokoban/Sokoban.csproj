@@ -137,6 +137,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="dll\Microsoft.DirectX.AudioVideoPlayback.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Models\205efad5a534bd9.png" />
     <Content Include="Models\background.png" />
     <Content Include="Models\background2.png" />
