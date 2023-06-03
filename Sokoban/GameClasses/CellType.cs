@@ -13,6 +13,8 @@ namespace Sokoban.GameClasses
         Player,
         Box,
         Wall,
-        Mob
+        StrongMob,
+        WeakMob,
+        Boss
     }
 }

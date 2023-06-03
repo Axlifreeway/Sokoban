@@ -77,6 +77,7 @@ namespace Sokoban
                     if (map[i, j] == 2) Player = new Player(i * Levels.Size, j * Levels.Size);
                     if (map[i, j] == 3) Boxes.Add(new Box(i * Levels.Size, j * Levels.Size));
                     if (map[i, j] == 6) Mob = new Mob(i * Levels.Size, j * Levels.Size, MobType.Strong);
+                    if (map[i, j] == 8) Mob = new Mob(i * Levels.Size, j * Levels.Size, MobType.Boss);
                     Cells[i, j] = new Cell(i * Levels.Size, j * Levels.Size);
                     EntityMap[i, j] = new Cell(i * Levels.Size, j * Levels.Size);
                     Cells[i, j].Type = (CellType)map[i, j];

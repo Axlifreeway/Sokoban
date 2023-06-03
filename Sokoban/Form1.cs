@@ -79,10 +79,11 @@ namespace Sokoban
                 painter.start = new Point(map.Player.X, map.Player.Y); 
             }
             TickCount += 1;
-            if(TickCount == TickForMoveMob && !IsWalk)
+            if(TickCount % TickForMoveMob == 0 && !IsWalk)
             {
-                IsWalk = Mob.Behavior(map);
-                TickCount = 0;
+                IsWalk = Mob.Behavior(map, TickCount);
+                if (TickCount == Mob.SecondsNeededForDamage)
+                    TickCount = 0;
             }
 
             if (IsWalk)

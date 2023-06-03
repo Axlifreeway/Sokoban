@@ -20,6 +20,7 @@ namespace Sokoban.GameClasses
                         new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
                         "Models\\StrongMob.png"));
 
+
             }
             else if (Type == MobType.Weak)
             {
@@ -35,8 +36,10 @@ namespace Sokoban.GameClasses
                 Model = new Bitmap(
                     Path.Combine(
                         new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
-                        "Models\\Boss.png"));
+                         "Models\\StrongMob.png"));
             }
+
+
             var source = new Bitmap(Path.Combine(new DirectoryInfo(
                 Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\205efad5a534bd9.png"));
             PlayerFrames = new PlayerFrames(source, 38, 133, 4);
@@ -45,8 +48,9 @@ namespace Sokoban.GameClasses
         public Queue<Direction> PathToPlayer;
         public readonly int RadiusSearch;
         public override bool IsDead { get => throw new NotImplementedException(); }
+        public static readonly int SecondsNeededForDamage = 50;
 
-        public static bool Behavior(Map map)
+        public static bool Behavior(Map map, int currentSecond)
         {
             var mob = map.Mob;
             bool move = false;
@@ -56,8 +60,16 @@ namespace Sokoban.GameClasses
 
             if (mob.IsPlayerFound(map))
             {
-                mob.GetPathToPlayer(map);
-                move = Controller.MobMoveToPlayer(map);
+                if(mob.Type == MobType.Strong || mob.Type == MobType.Boss)
+                {
+                    mob.GetPathToPlayer(map);
+                    move = Controller.MobMoveToPlayer(map);
+                    if (mob.Type == MobType.Boss)
+                    {
+                        if (currentSecond == SecondsNeededForDamage)
+                            Damage(map);
+                    }
+                }
             }
 
             return move;
