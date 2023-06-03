@@ -20,7 +20,7 @@ namespace Sokoban.GameClasses.View
         public List<Audio> game = new List<Audio>();
         public List<Audio> currentPlaylist = new List<Audio>();
 
-        public Audio playerStep { get; private set; }
+        public Audio PlayerStep { get; private set; }
         int musicVolume;
         public int MusicVolume
         {
@@ -68,7 +68,7 @@ namespace Sokoban.GameClasses.View
                 game.Add(new Audio(file.FullName));
             }
 
-            playerStep = new Audio(map.Player.PlayerSounds.FootStepSound.FullName);
+            PlayerStep = new Audio(map.Player.PlayerSounds.FootStepSound.FullName);
         }
 
         public GameMusic()

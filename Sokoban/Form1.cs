@@ -59,7 +59,7 @@ namespace Sokoban
             if (map.Player.IsDead)
             {
                 map.Form.GameInitialisation(Levels.currentLevel);
-                music.PlaySound(music.playerStep, map.Player.PlayerSounds.DeadSound.FullName, 100);
+                music.PlaySound(music.PlayerStep, map.Player.PlayerSounds.DeadSound.FullName, 100);
                 MessageBox.Show("Вы умерли");
             }
 
@@ -69,7 +69,7 @@ namespace Sokoban
                 IsKeyPress = !map.Player.PlayerFrames.IsEndAnimate;
                 if (map.Player.PlayerFrames.CurrentFrame == 2)
                 {
-                    music.PlaySound(music.playerStep, map.Player.PlayerSounds.FootStepSound.FullName);
+                    music.PlaySound(music.PlayerStep, map.Player.PlayerSounds.FootStepSound.FullName);
                 }
             }
             else
@@ -91,7 +91,7 @@ namespace Sokoban
                     IsWalk = !map.Mob.PlayerFrames.IsEndAnimate;
                     if (map.Mob.PlayerFrames.CurrentFrame == 2)
                     {
-                        music.PlaySound(music.playerStep, map.Player.PlayerSounds.FootStepSound.FullName);
+                        music.PlaySound(music.PlayerStep, map.Player.PlayerSounds.FootStepSound.FullName);
                     }
                 }      
             }
