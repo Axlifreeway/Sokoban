@@ -50,6 +50,10 @@ namespace Sokoban.GameClasses.Servis
                 if (map.Player.X == box.X && map.Player.Y == box.Y)
                     PlayerServis.BoxMove(map, box);
             }
+
+            if (map.Mob != null)
+                if (map.Player.X == map.Mob.X && map.Player.Y == map.Mob.Y)
+                    Mob.Damage(map);
             return move;
         }
 

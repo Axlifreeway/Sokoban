@@ -50,12 +50,20 @@ namespace Sokoban.GameClasses
         {
             var mob = map.Mob;
             bool move = false;
-            if (mob == null) return false;
+
+            if (mob == null) return move;
+            if (map[mob.X, mob.Y].Type == CellType.Box)
+            {
+                map.Mob = null;
+                return move;
+            }
+
             if (mob.IsPlayerFound(map))
             {
                 mob.GetPathToPlayer(map);
                 move = Controller.MobMoveToPlayer(map);
             }
+
             return move;
         }
 
