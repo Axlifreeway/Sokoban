@@ -22,7 +22,7 @@ namespace Sokoban
         int TickForMoveMob = 10;
         public GameMusic music;
         public Painter painter = new Painter();
-        public GameForm()
+        public GameForm(Settings set)
         {
             InitializeComponent();
             timer1 = new Timer();
@@ -34,8 +34,8 @@ namespace Sokoban
             KeyDown += new KeyEventHandler(OnPress);
             GameInitialisation(Levels.currentLevel);
             music = new GameMusic(map);
-            music.MusicVolume = 85;
-            music.SoundsVolume = 90;
+            music.MusicVolume = set.MusicVolume;
+            music.SoundsVolume = set.SoundsVolume;
             music.currentPlaylist = music.game;
             music.PlayPlaylist();
         }

@@ -1,5 +1,6 @@
 ﻿using Sokoban.GameClasses;
 using Sokoban.GameClasses.View;
+using Sokoban.Menu;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,6 +17,7 @@ namespace Sokoban
         Mob mob = new Mob(150, 150, MobType.Strong);
         Player player = new Player(500, 150);
         Map map;
+        Settings settings = new Settings();
         public int[,] menu = new int[,]
         {
             {4, 0, 0, 0, 0, 0},
@@ -39,6 +41,8 @@ namespace Sokoban
             timer.Interval = 200;
             timer.Tick += Update; 
             timer.Start();
+            settings.MusicVolume = 100;
+            settings.SoundsVolume = 100;    
             map = new Map(menu);
             music.MusicVolume = 100;
             music.currentPlaylist = music.menu;
@@ -47,7 +51,7 @@ namespace Sokoban
 
         private void gameStartButton_Click(object sender, EventArgs e)
         {
-            var game = new GameForm();
+            var game = new GameForm(settings);
             music.StopMusic();
             timer.Stop();
             game.ShowDialog();
@@ -57,7 +61,15 @@ namespace Sokoban
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            
+            var game = new SettingsForm();
+            music.StopMusic();
+            timer.Stop();
+            game.ShowDialog();
+            music.MusicVolume = game.volume1;
+            music.SoundsVolume = game.volume2;
+            settings = game.GetSettings();
+            timer.Start();
+            music.PlayPlaylist();
         }
 
         private void authorsButton_Click(object sender, EventArgs e)
