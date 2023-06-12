@@ -66,6 +66,7 @@ namespace Sokoban.GameClasses.Servis
         public bool MobMoveToPlayer(Map map, int currentSecond)
         {
             var mob = map.Mob;
+            if (mob == null) return false;
             var path = mob.Behavior(map, currentSecond);
             if (path.Count == 0) return false;
             var dir = path.Dequeue();
