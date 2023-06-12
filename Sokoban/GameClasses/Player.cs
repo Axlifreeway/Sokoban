@@ -6,12 +6,10 @@ using Sokoban.GameClasses.View;
 
 namespace Sokoban
 {
-    public class Player:Entity
+    public class Player: Entity
     {
-        public Player(int x, int y):base(x, y)
+        public Player(int x, int y): base(x, y)
         {            
-            Model = new Bitmap(Path.Combine(new DirectoryInfo(
-                Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\MainHero.png"));
             var source = new Bitmap(Path.Combine(new DirectoryInfo(
                 Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\PlayerPicture.png"));
             PlayerFrames = new PlayerFrames(source, 1, 168, 4);

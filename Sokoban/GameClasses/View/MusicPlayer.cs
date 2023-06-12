@@ -21,7 +21,7 @@ namespace Sokoban.GameClasses.View
         public List<Audio> currentPlaylist = new List<Audio>();
 
         public Audio PlayerStep { get; private set; }
-        int musicVolume;
+        int musicVolume = 0;
         public int MusicVolume
         {
             get
@@ -34,7 +34,7 @@ namespace Sokoban.GameClasses.View
                 musicVolume = -100 * (100 - value);
             }
         }
-        int soundsVolume;
+        int soundsVolume = 0;
         public int SoundsVolume
         {
             get
@@ -49,17 +49,15 @@ namespace Sokoban.GameClasses.View
         }
 
 
-        public GameMusic(Map map)
+        public GameMusic(MusicSettings settings)
         {
-            SoundsVolume = 100;
-            MusicVolume = 100;
             menuMediaList.Add(new FileInfo(
                 Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\menumusicpiano.wav")));
 
             gameMediaList.Add(new FileInfo(
-                Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\саундтрек.wav")));
+                Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Music\\415805__sunsai__menu-background-musicRobin Heijn.wav")));
 
-            foreach (FileInfo file in menuMediaList) 
+            foreach (FileInfo file in menuMediaList)
             {
                 menu.Add(new Audio(file.FullName));
             }
@@ -67,8 +65,8 @@ namespace Sokoban.GameClasses.View
             {
                 game.Add(new Audio(file.FullName));
             }
-
-            PlayerStep = new Audio(map.Player.PlayerSounds.FootStepSound.FullName);
+            SoundsVolume = settings.SoundsVolume;
+            MusicVolume = settings.MusicVolume;
         }
 
         public GameMusic()
@@ -89,15 +87,17 @@ namespace Sokoban.GameClasses.View
             }
         }
 
-        public void PlaySound(Audio sound, string fn)
+        public void PlaySound(string fn)
         {  
+            var sound = new Audio(fn);
             sound.Open(fn);
             sound.Volume = SoundsVolume;
             sound.Play();
         }
 
-        public void PlaySound(Audio sound, string fn, int volume)
+        public void PlaySound(string fn, int volume)
         {
+            var sound = new Audio(fn);
             sound.Open(fn);
             sound.Volume = -100 * (100 - volume);
             sound.Play();

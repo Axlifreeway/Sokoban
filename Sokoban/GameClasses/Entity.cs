@@ -17,7 +17,6 @@ namespace Sokoban.GameClasses
             X = x; Y = y;
         }
       
-        public Image Model { get; protected set; }
         public PlayerFrames PlayerFrames { get; protected set; }
         public EntitySounds PlayerSounds { get; protected set; }
         public int X { get; set; }

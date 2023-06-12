@@ -9,7 +9,7 @@ namespace Sokoban.GameClasses.Servis
 {
     internal class PlayerServis
     {
-        public static bool Move(Map map, Player player)
+        public bool Move(Map map, Player player)
         {
             int moveX = Levels.Size * player.DirX;
             int moveY = Levels.Size * player.DirY;
@@ -32,11 +32,10 @@ namespace Sokoban.GameClasses.Servis
                 map[player.X, player.Y].Type = CellType.Player;
                 isMoved = true;
             }
-
             return isMoved;
         }
 
-        public static void BoxMove(Map map, Box box)
+        public void BoxMove(Map map, Box box)
         {
             int moveX = Levels.Size * map.Player.DirX;
             int moveY = Levels.Size * map.Player.DirY;

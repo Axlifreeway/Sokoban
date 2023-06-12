@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sokoban.GameClasses
 {
-    public class Settings
+    public class MusicSettings
     {
         int musicVolume;
         public int MusicVolume

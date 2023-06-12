@@ -15,67 +15,48 @@ namespace Sokoban.GameClasses
             if (Type == MobType.Strong)
             {
                 RadiusSearch = 3;
-                Model = new Bitmap(
-                    Path.Combine(
-                        new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
-                        "Models\\StrongMob.png"));
-
-
             }
             else if (Type == MobType.Weak)
             {
                 RadiusSearch = 0;
-                Model = new Bitmap(
-                    Path.Combine(
-                        new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
-                        "Models\\WeakMob.png"));
             }
             else
             {
-                RadiusSearch = 3; //3?
-                Model = new Bitmap(
-                    Path.Combine(
-                        new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
-                         "Models\\StrongMob.png"));
+                RadiusSearch = 3;
             }
-
 
             var source = new Bitmap(Path.Combine(new DirectoryInfo(
                 Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(), "Models\\205efad5a534bd9.png"));
+
             PlayerFrames = new PlayerFrames(source, 38, 133, 4);
         }
+
         private readonly MobType Type;
-        public Queue<Direction> PathToPlayer;
+
         public readonly int RadiusSearch;
         public override bool IsDead { get => throw new NotImplementedException(); }
+
         public static readonly int SecondsNeededForDamage = 50;
 
-        public static bool Behavior(Map map, int currentSecond)
+        public Queue<Direction> Behavior(Map map, int currentSecond)
         {
-            var mob = map.Mob;
-            bool move = false;
-
-            if (mob == null) return move;
-            
-
-            if (mob.IsPlayerFound(map))
+            if (IsPlayerFound(map))
             {
-                if(mob.Type == MobType.Strong || mob.Type == MobType.Boss)
+                if(Type == MobType.Strong || Type == MobType.Boss)
                 {
-                    mob.GetPathToPlayer(map);
-                    move = Controller.MobMoveToPlayer(map);
-                    if (mob.Type == MobType.Boss)
+                    var pathToPlayer = GetPathToPlayer(map);                  
+                    if (Type == MobType.Boss)
                     {
                         if (currentSecond == SecondsNeededForDamage)
                             Damage(map);
                     }
+                    return pathToPlayer;
                 }
             }
-
-            return move;
+            return new Queue<Direction>();
         }
 
-        public bool IsPlayerFound(Map map)
+        private bool IsPlayerFound(Map map)
         {
             for (int i = -RadiusSearch; i <= RadiusSearch; i++)
                 for (int j = -RadiusSearch; j <= RadiusSearch; j++)
@@ -87,11 +68,10 @@ namespace Sokoban.GameClasses
                     if (map[currentCellX, currentCellY].Type == CellType.Player)
                         return true;
                 }
-
             return false;
         }
 
-        public void GetPathToPlayer(Map map)
+        private Queue<Direction> GetPathToPlayer(Map map)
         {
             var directions = new Queue<Direction>();
             var path = SearchInWidth.Search(map, this);
@@ -112,16 +92,15 @@ namespace Sokoban.GameClasses
                 currentX = cell.X;
                 currentY = cell.Y;
             }
-
-            PathToPlayer = directions;
+            return directions;
         }
 
-        public static void Damage(Map map)
+        public void Damage(Map map)
         {
             map.Player.HP.RemoveAt(0);
         }
 
-        public static bool PointInRangeSearch(Map map, int x, int y)
+        public bool PointInRangeSearch(Map map, int x, int y)
         {
             return x <= map.Mob.RadiusSearch * Levels.Size + map.Mob.X
                        && x >= -map.Mob.RadiusSearch * Levels.Size - map.Mob.X

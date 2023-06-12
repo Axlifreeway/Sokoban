@@ -11,11 +11,13 @@ using System.Threading.Tasks;
 
 namespace Sokoban
 {
-    public class Box:Entity
+    public class Box: Entity
     {
         public bool Win { get; set; }
 
         public override bool IsDead { get => false; }
+
+        public Bitmap Model { get; private set; }
 
         public Box(int x, int y):base(x, y)
         {

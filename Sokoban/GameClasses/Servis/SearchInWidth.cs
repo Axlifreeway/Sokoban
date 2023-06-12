@@ -23,7 +23,7 @@ namespace Sokoban.GameClasses.Servis
                 var x = partOfPath.Last.Value.X;
                 var y = partOfPath.Last.Value.Y;
                 if (!PointInRangeMap(map, x, y)) continue;
-                if (!Mob.PointInRangeSearch(map, x, y)) continue;
+                if (!mob.PointInRangeSearch(map, x, y)) continue;
                 if (PointIsBoxOrWall(map, x, y)) continue;
                 if (visited.Contains(map[x, y])) continue;
 
@@ -68,13 +68,7 @@ namespace Sokoban.GameClasses.Servis
             foreach (var item in original)
             {
                 clone.AddLast(item);
-            }/*
-            for (int i =0; i < original.Count; i++)
-            {
-                clone.AddLast(original.First);
-                original.RemoveFirst();
-            }*/
-
+            }
             return clone;
         }
     }

@@ -28,9 +28,9 @@ namespace Sokoban.Menu
             volume2 = (int)numericUpDown2.Value;
         }
 
-        public Settings GetSettings()
+        public MusicSettings GetSettings()
         {
-            var set = new Settings();
+            var set = new MusicSettings();
             set.MusicVolume = volume1;
             set.SoundsVolume = volume2;
             return set;

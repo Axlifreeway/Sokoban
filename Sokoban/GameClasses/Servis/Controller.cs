@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using Sokoban.GameClasses.View;
 namespace Sokoban.GameClasses.Servis
 {
     public class Controller
     {
-        public static bool PlayerMove(KeyEventArgs e, Map map)
+        PlayerServis playerServis;
+        public Controller() { playerServis = new PlayerServis(); }
+
+        public bool PlayerMove(KeyEventArgs e, Map map)
         {
             Player player = map.Player;
             Mob mob = map.Mob;
@@ -20,22 +17,22 @@ namespace Sokoban.GameClasses.Servis
                 case Keys.Up:
                     player.DirY = -1;
                     player.DirX = 0;
-                    move = PlayerServis.Move(map, player);
+                    move = playerServis.Move(map, player);
                     break;
                 case Keys.Down:
                     player.DirY = 1;
                     player.DirX = 0;
-                    move = PlayerServis.Move(map, player);
+                    move = playerServis.Move(map, player);
                     break;
                 case Keys.Left:
                     player.DirY = 0;
                     player.DirX = -1;
-                    move = PlayerServis.Move(map, player);
+                    move = playerServis.Move(map, player);
                     break;
                 case Keys.Right:
                     player.DirY = 0;
                     player.DirX = 1;
-                    move = PlayerServis.Move(map, player);
+                    move = playerServis.Move(map, player);
                     break;
                 case Keys.R:
                     map.Form.GameInitialisation(Levels.currentLevel);
@@ -49,7 +46,7 @@ namespace Sokoban.GameClasses.Servis
             foreach (var box in map.Boxes)
             {
                 if (map.Player.X == box.X && map.Player.Y == box.Y)
-                    PlayerServis.BoxMove(map, box);
+                    playerServis.BoxMove(map, box);
             }
             
             if (map.Mob != null)
@@ -61,17 +58,16 @@ namespace Sokoban.GameClasses.Servis
                 }
 
                 if (map.Player.X == mob.X && map.Player.Y == mob.Y)
-                    Mob.Damage(map);
+                    mob.Damage(map);
             }
             return move;
         }
 
-        public static bool MobMoveToPlayer(Map map)
+        public bool MobMoveToPlayer(Map map, int currentSecond)
         {
             var mob = map.Mob;
-            var path = map.Mob.PathToPlayer;
+            var path = mob.Behavior(map, currentSecond);
             if (path.Count == 0) return false;
-
             var dir = path.Dequeue();
             int moveY;
             int moveX;
@@ -117,7 +113,7 @@ namespace Sokoban.GameClasses.Servis
             }               
 
             if (map.Player.X == map.Mob.X && map.Player.Y == map.Mob.Y)
-                Mob.Damage(map);
+                mob.Damage(map);
             return move;
         }
     }

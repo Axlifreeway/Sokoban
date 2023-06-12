@@ -135,7 +135,6 @@ namespace Sokoban.GameClasses.View
             }
             bmp.Dispose();
             return listFrames;
-
         }
     }
 }
