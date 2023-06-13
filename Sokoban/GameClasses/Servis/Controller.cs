@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 namespace Sokoban.GameClasses.Servis
 {
     public class Controller
@@ -15,24 +14,16 @@ namespace Sokoban.GameClasses.Servis
             switch (e.KeyCode)
             {
                 case Keys.Up:
-                    player.DirY = -1;
-                    player.DirX = 0;
-                    move = playerServis.Move(map, player);
+                    player.Direction = Direction.Up;
                     break;
                 case Keys.Down:
-                    player.DirY = 1;
-                    player.DirX = 0;
-                    move = playerServis.Move(map, player);
+                    player.Direction = Direction.Down;
                     break;
                 case Keys.Left:
-                    player.DirY = 0;
-                    player.DirX = -1;
-                    move = playerServis.Move(map, player);
+                    player.Direction = Direction.Left;
                     break;
                 case Keys.Right:
-                    player.DirY = 0;
-                    player.DirX = 1;
-                    move = playerServis.Move(map, player);
+                    player.Direction = Direction.Right;
                     break;
                 case Keys.R:
                     map.Form.GameInitialisation(Levels.currentLevel);
@@ -43,20 +34,19 @@ namespace Sokoban.GameClasses.Servis
                 default:
                     return false;                   
             }
-            foreach (var box in map.Boxes)
+            move = playerServis.Move(map, player);
+
+            if (map[player.X, player.Y].EntityPrevious is Box)
             {
-                if (map.Player.X == box.X && map.Player.Y == box.Y)
-                    playerServis.BoxMove(map, box);
-            }
-            
+                playerServis.BoxMove(map, (Box)map[player.X, player.Y].EntityPrevious);
+            }   
+
             if (map.Mob != null)
             {
                 if (map[mob.X, mob.Y].Type == CellType.Box)
                 {
                     player.KillMob(map);
-                    return move;
                 }
-
                 if (map.Player.X == mob.X && map.Player.Y == mob.Y)
                     mob.Damage(map);
             }
@@ -70,51 +60,24 @@ namespace Sokoban.GameClasses.Servis
             var path = mob.Behavior(map, currentSecond);
             if (path.Count == 0) return false;
             var dir = path.Dequeue();
-            int moveY;
-            int moveX;
             bool move = false;
-            switch (dir)
-            {
-                case Direction.Up:
-                    mob.DirY = -1;
-                    mob.DirX = 0;
-                    moveY = -Levels.Size;
-                    moveX = 0;
-                    break;
-                case Direction.Down:
-                    mob.DirY = 1;
-                    mob.DirX = 0;
-                    moveY = Levels.Size;
-                    moveX = 0;
-                    break;
-                case Direction.Left:
-                    mob.DirY = 0;
-                    mob.DirX = -1;
-                    moveY = 0;
-                    moveX = -Levels.Size;
-                    break;
-                case Direction.Right:
-                    mob.DirY = 0;
-                    mob.DirX = 1;
-                    moveY = 0;
-                    moveX = Levels.Size;
-                    break;
-                default:
-                    return false;
-            }
+            mob.Direction = dir;
 
-            if (map.Mob.X + map.Mob.X >= 0 && map.Mob.X + moveX < map.Size.Width)
+            if (mob.DirX + mob.X >= 0 && mob.X + mob.DirX < map.Size.Width
+                && mob.Y + mob.DirY >= 0 && mob.Y + mob.DirY< map.Size.Height)
             {
-                map.Mob.X += moveX;
+                map[mob.X, mob.Y].Type = CellType.Classic;
+                map[mob.X, mob.Y].EntityNow = null;
+                mob.X += mob.DirX;
+                mob.Y += mob.DirY;
+                map[mob.X, mob.Y].Type = (CellType)6;
+                map[mob.X, mob.Y].EntityNow = mob;
                 move = true;
-            }                          
-            if (map.Mob.Y + moveY >= 0 && map.Mob.Y + moveY < map.Size.Height)
-            {
-                map.Mob.Y += moveY;
-            }               
-
+            }          
+            
             if (map.Player.X == map.Mob.X && map.Player.Y == map.Mob.Y)
                 mob.Damage(map);
+
             return move;
         }
     }

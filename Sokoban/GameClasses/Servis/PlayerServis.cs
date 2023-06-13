@@ -1,52 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Sokoban;
+﻿using System.Drawing;
+using System.IO;
+
 namespace Sokoban.GameClasses.Servis
 {
     internal class PlayerServis
     {
         public bool Move(Map map, Player player)
         {
-            int moveX = Levels.Size * player.DirX;
-            int moveY = Levels.Size * player.DirY;
-            bool isMoved = false;
-            if (player.X + moveX >= 0 && player.X + moveX < map.Size.Width
-                && player.Y + moveY >= 0 && player.Y + moveY < map.Size.Height
-                && map[moveX + player.X, moveY + player.Y].Type != CellType.Wall)
+            var direction = new Point(player.DirX, player.DirY);
+            var newPosition = new Point(player.DirX + player.X, player.DirY + player.Y);            
+            if (map.IsAccessCell(newPosition, direction))
             {
-                foreach (var box in map.Boxes)
-                {
-                    if (player.X + moveX == box.X && player.Y + moveY == box.Y
-                        && (moveX + box.X < 0 || moveY + box.Y < 0
-                        || map[moveX + box.X, moveY + box.Y].Type == CellType.Wall
-                        || map[moveX + box.X, moveY + box.Y].Type == CellType.Box))
-                        return isMoved;
-                }
                 map[player.X, player.Y].Type = CellType.Classic;
-                player.X += moveX;
-                player.Y += moveY;
+                map[player.X, player.Y].EntityNow = null;
+                player.X += direction.X;
+                player.Y += direction.Y;
                 map[player.X, player.Y].Type = CellType.Player;
-                isMoved = true;
+                map[player.X, player.Y].EntityNow = player;
             }
-            return isMoved;
+            return map.IsAccessCell(newPosition, direction);
         }
 
         public void BoxMove(Map map, Box box)
         {
-            int moveX = Levels.Size * map.Player.DirX;
-            int moveY = Levels.Size * map.Player.DirY;
-            if (moveX + box.X < map.Size.Width && moveX + box.X >= 0
-                && moveY + box.Y < map.Size.Height && moveY + box.Y >= 0
-                && map[moveX + box.X, moveY + box.Y].Type != CellType.Wall
-                && map[moveX + box.X, moveY + box.Y].Type != CellType.Box)
+            var direction = new Point(map.Player.DirX, map.Player.DirY);
+            var newPosition = new Point(box.X + direction.X, box.Y + direction.Y);
+            if (map.IsAccessCell(newPosition, direction))
             {
-                box.X += moveX;
-                box.Y += moveY;
+                box.X += direction.X;
+                box.Y += direction.Y;
                 map[box.X, box.Y].Type = CellType.Box;
+                map[box.X, box.Y].EntityNow = box;
             }
             map.CheckOnWin();
         }

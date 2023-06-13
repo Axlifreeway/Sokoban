@@ -19,6 +19,5 @@ namespace Sokoban.GameClasses
         {
             throw new NotImplementedException();
         }
-
     }
 }

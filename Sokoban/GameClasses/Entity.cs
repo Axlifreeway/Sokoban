@@ -1,12 +1,5 @@
 ﻿using Sokoban.GameClasses.View;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Management.Instrumentation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sokoban.GameClasses
 {
@@ -38,6 +31,26 @@ namespace Sokoban.GameClasses
                 else if (DirX == -1 && DirY == 0)
                     return Direction.Left;
                 else return Direction.Down;
+            }
+            set
+            {
+                switch(value) 
+                {
+                    case Direction.Down:
+                        DirX = 0; DirY = 1;
+                        break;
+                    case Direction.Up:
+                        DirX = 0; DirY = -1;
+                        break;
+                    case Direction.Right:
+                        DirX = 1;  DirY = 0;
+                        break;
+                    case Direction.Left:
+                        DirX = -1; DirY = 0;
+                        break;
+                    default:
+                        throw new Exception();
+                }
             }
         }
 

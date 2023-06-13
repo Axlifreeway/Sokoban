@@ -31,7 +31,7 @@ namespace Sokoban.GameClasses
             PlayerFrames = new PlayerFrames(source, 38, 133, 4);
         }
 
-        private readonly MobType Type;
+        public readonly MobType Type;
 
         public readonly int RadiusSearch;
         public override bool IsDead { get => throw new NotImplementedException(); }
@@ -61,8 +61,8 @@ namespace Sokoban.GameClasses
             for (int i = -RadiusSearch; i <= RadiusSearch; i++)
                 for (int j = -RadiusSearch; j <= RadiusSearch; j++)
                 {
-                    var currentCellX = X + Levels.Size * i;
-                    var currentCellY = Y + Levels.Size * j;
+                    var currentCellX = X + i;
+                    var currentCellY = Y + j;
                     if (map.Size.Width <= currentCellX || currentCellX < 0) break;
                     if (map.Size.Height <= currentCellY || currentCellY < 0) continue;
                     if (map[currentCellX, currentCellY].Type == CellType.Player)
@@ -80,7 +80,6 @@ namespace Sokoban.GameClasses
 
             while (path.Count != 0)
             {
-
                 Cell cell = path.First.Value;
                 path.RemoveFirst();
 
@@ -102,10 +101,10 @@ namespace Sokoban.GameClasses
 
         public bool PointInRangeSearch(Map map, int x, int y)
         {
-            return x <= map.Mob.RadiusSearch * Levels.Size + map.Mob.X
-                       && x >= -map.Mob.RadiusSearch * Levels.Size - map.Mob.X
-                       && y <= map.Mob.RadiusSearch * Levels.Size + map.Mob.Y
-                       && y >= -map.Mob.RadiusSearch * Levels.Size - map.Mob.Y;
+            return x <= map.Mob.RadiusSearch + map.Mob.X
+                       && x >= -map.Mob.RadiusSearch- map.Mob.X
+                       && y <= map.Mob.RadiusSearch + map.Mob.Y
+                       && y >= -map.Mob.RadiusSearch - map.Mob.Y;
         }
     }
 }

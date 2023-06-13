@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extentions\PointExtentions.cs" />
     <Compile Include="GameClasses\EntityMove.cs" />
     <Compile Include="GameClasses\HealthPoints.cs" />
     <Compile Include="GameClasses\Mob.cs" />

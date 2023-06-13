@@ -29,7 +29,7 @@ namespace Sokoban
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             timerAnimate = new Timer();
-            timerAnimate.Interval = 100;
+            timerAnimate.Interval = 80;
             timerAnimate.Tick += new EventHandler(Update);
             KeyDown += new KeyEventHandler(OnPress);           
             music.currentPlaylist = music.game;
@@ -41,12 +41,12 @@ namespace Sokoban
         {
             map = new Map(Levels.GetLevel(level), this);
             
-            this.Size = map.Size;
+            this.Size = map.GetWindowSize();
 
-            painter.start = new Point(map.Player.X, map.Player.Y);
+            painter.start = new Point(map.Player.X * Levels.Size, map.Player.Y * Levels.Size);
             if (map.Mob != null)
             {
-                painter.startM = new Point(map.Mob.X, map.Mob.Y);
+                painter.startM = new Point(map.Mob.X * Levels.Size, map.Mob.Y * Levels.Size);
             }
             timerAnimate.Start();
         }
@@ -71,15 +71,14 @@ namespace Sokoban
             }
             else
             {
-                painter.start = new Point(map.Player.X, map.Player.Y); 
+                painter.start = new Point(map.Player.X * Levels.Size, map.Player.Y * Levels.Size); 
             }
             TickCount += 1;
             if(TickCount % TickForMoveMob == 0 && !IsWalk)
             {
                 var mob = map.Mob;
                 IsWalk = controller.MobMoveToPlayer(map, TickCount);
-                if (TickCount == Mob.SecondsNeededForDamage)
-                    TickCount = 0;
+                TickCount = 0;
             }
 
             if (IsWalk)
@@ -97,7 +96,7 @@ namespace Sokoban
             else
             {
                 if (map.Mob != null)
-                    painter.startM = new Point(map.Mob.X, map.Mob.Y);
+                    painter.startM = new Point(map.Mob.X * Levels.Size, map.Mob.Y * Levels.Size);
             }
             Invalidate();            
         }

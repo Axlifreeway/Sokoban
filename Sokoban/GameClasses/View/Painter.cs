@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace Sokoban.GameClasses.View
@@ -30,7 +24,7 @@ namespace Sokoban.GameClasses.View
 
             foreach (var box in map.Boxes)
             {
-                graphics.DrawImage(box.Model, box.X, box.Y);
+                graphics.DrawImage(box.Model, Levels.Size * box.X, Levels.Size * box.Y);
             }
 
             AnimatePlayer(map, graphics);

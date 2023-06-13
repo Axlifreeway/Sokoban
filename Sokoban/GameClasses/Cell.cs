@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sokoban
 {
@@ -14,6 +11,19 @@ namespace Sokoban
         public Cell(int x, int y) : base(x, y) { }
         public CellType Type { get; set; }
         public override bool IsDead { get => throw new NotImplementedException(); }
+
+        public Entity entityNow;
+        public Entity EntityNow 
+        {
+            get => entityNow;
+            set
+            {
+                EntityPrevious = entityNow;
+                entityNow = value;
+            }
+        }
+
+        public Entity EntityPrevious { get; private set; }
 
         public Image GetModel()
         {
