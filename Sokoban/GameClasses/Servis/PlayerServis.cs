@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.IO;
 
 namespace Sokoban.GameClasses.Servis
 {

@@ -18,7 +18,6 @@ namespace Sokoban
         Painter painter;
         Controller controller;
 
-
         public GameForm(Controller controller, Painter painter, GameMusic musicPlayer)
         {
             InitializeComponent();
